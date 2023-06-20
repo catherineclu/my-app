@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
 export const HomeScreen = ({navigation}) => {
@@ -8,6 +8,8 @@ export const HomeScreen = ({navigation}) => {
             <Text>
                 Home Screen!
             </Text>
+            <Button title="Go To Item Page" onPress={() => navigation.navigate('ItemScreen')}/>
         </View>
     );
 }
+
