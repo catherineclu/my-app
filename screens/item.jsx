@@ -1,14 +1,15 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { NativeBaseProvider, Box } from "native-base";
 
 export const ItemScreen = ({navigation}) => {
     return (
-        <View style={styles.container}>
-            <Text>
-                Welcome to item page!
-            </Text>
-        </View>
+        <NativeBaseProvider>
+        {/* <View style={styles.container}> */}
+            <Box>Welcome to item page</Box>
+        {/* </View> */}
+        </NativeBaseProvider>
     );
 }
 
