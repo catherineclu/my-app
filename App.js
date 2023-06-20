@@ -4,10 +4,12 @@ import {NavigationContainer} from '@react-navigation/native';
 
 export default function App() {
   return (
+    <NavigationContainer>
     <View style={styles.container}>
       <Text>Welcome to my app!</Text>
       <StatusBar style="auto" />
     </View>
+    </NavigationContainer>
   );
 }
 
