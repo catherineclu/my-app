@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 export const ItemScreen = ({navigation}) => {
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={styles.container}>
             <Text>
                 Welcome to item page!
             </Text>
