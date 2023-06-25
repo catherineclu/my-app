@@ -11,7 +11,11 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 25,
         //fontWeight: 'bold',
-        color: 'red'
+        color: 'red',
+        flex: 1
+    },
+    bodytext: {
+        flex: 1
     }
 });
 

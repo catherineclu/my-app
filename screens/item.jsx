@@ -16,9 +16,11 @@ export const ItemScreen = ({navigation}) => {
                         h={300} 
                         resizeMode="contain"
                 />
-                <Text style={styles.heading}>Vendor name: The Cucumber Chef</Text>
-                <Text>Cost, Location</Text>
-                <Text>Menu coming below lol</Text>
+                <View style={{flexDirection:'row'}}>
+                <Text style={styles.heading}>Cucumber Chef</Text>
+                <Text style={{textAlign: 'right'}}>Cost, Location</Text>
+                </View>
+                <Text>Information</Text>
             </ScrollView>
         </Box>
         </NativeBaseProvider>
