@@ -9,13 +9,19 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     heading: {
-        fontSize: 25,
-        //fontWeight: 'bold',
+        fontSize: 20,
+        fontWeight: 'bold',
         color: 'red',
-        flex: 1
+        backgroundColor: 'blue',
+        flex: 1,
+        fontFamily: 'Arial',
+        padding: 10,
     },
     bodytext: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'red',
+        fontFamily: 'Arial',
+        padding: 10
     }
 });
 

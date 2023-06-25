@@ -17,10 +17,18 @@ export const ItemScreen = ({navigation}) => {
                         resizeMode="contain"
                 />
                 <View style={{flexDirection:'row'}}>
-                <Text style={styles.heading}>Cucumber Chef</Text>
-                <Text style={{textAlign: 'right'}}>Cost, Location</Text>
+                    <View style={itemstyles.container}>
+                    <Text style={styles.heading}>Cucumber Chef</Text>
+                    </View>
+
+                    <View style={itemstyles.container}>
+                    <Text style={[styles.bodytext, {textAlign: 'right'}]}>Cost, Location</Text>
+                    </View>
                 </View>
-                <Text>Information</Text>
+                <View style={itemstyles.container}>
+                    <Text style={{fontWeight: 'bold'}}>Information:</Text>
+                    <Text style={styles.bodytext}></Text>
+                </View>
             </ScrollView>
         </Box>
         </NativeBaseProvider>
@@ -31,7 +39,8 @@ const itemstyles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      alignItems: 'center',
+      //alignItems: 'left',
       justifyContent: 'center',
+      padding: 10
     },
 });
