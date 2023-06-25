@@ -11,7 +11,7 @@ export const ItemScreen = ({navigation}) => {
         <Box safeArea flex={1} bg={Colors.white}>
             {/* header */}
             <View style={styles.header}>
-                <Text>Header</Text>
+                <Text>Header, we might not need this so we can delete</Text>
             </View>
             <ScrollView px={5} showsVerticalScrollIndicator={false} style={{backgroundColor: 'orange'}}>
                 <Image source={require("../assets/images/cucumber.jpg")} 
