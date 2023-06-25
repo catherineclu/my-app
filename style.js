@@ -11,18 +11,33 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: 'red',
+        fontStyle: 'italic',
+        color: 'white',
         backgroundColor: 'blue',
         flex: 1,
-        fontFamily: 'Arial',
+        fontFamily: 'AvenirNext',
         padding: 10,
     },
     bodytext: {
         flex: 1,
         backgroundColor: 'red',
-        fontFamily: 'Arial',
+        fontFamily: 'AvenirNext',
+        //#bold for now because regular was very thin
+        fontWeight: "bold",
         padding: 10
-    }
+    },
+    subheading: {
+        fontWeight: 'bold',
+        backgroundColor: 'green',
+        padding: 10
+    },
+    header:{
+        flex: 0.2,
+        backgroundColor: 'magenta',
+        //alignItems: 'left',
+        justifyContent: 'center',
+        padding: 5,
+      }
 });
 
 export default styles;

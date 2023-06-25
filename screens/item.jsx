@@ -8,27 +8,36 @@ import styles from '../style.js'
 export const ItemScreen = ({navigation}) => {
     return (
         <NativeBaseProvider>
-        <Box safeArea flex={1} bg={Colors.white}>Welcome to item page
-            <ScrollView px={5} showsVerticalScrollIndicator={false}>
+        <Box safeArea flex={1} bg={Colors.white}>
+            {/* header */}
+            <View style={styles.header}>
+                <Text>Header</Text>
+            </View>
+            <ScrollView px={5} showsVerticalScrollIndicator={false} style={{backgroundColor: 'orange'}}>
                 <Image source={require("../assets/images/cucumber.jpg")} 
                         alt="cucumber image" 
                         w="full" 
                         h={300} 
                         resizeMode="contain"
+                        style={itemstyles.container}
                 />
+                {/* first line of text + vendor */}
+                {/* figure out how to make enter only on new words */}
                 <View style={{flexDirection:'row'}}>
                     <View style={itemstyles.container}>
                     <Text style={styles.heading}>Cucumber Chef</Text>
                     </View>
-
+                {/* first line of text + cost/location text */}
                     <View style={itemstyles.container}>
                     <Text style={[styles.bodytext, {textAlign: 'right'}]}>Cost, Location</Text>
                     </View>
                 </View>
+                {/* vendor information */}
                 <View style={itemstyles.container}>
-                    <Text style={{fontWeight: 'bold'}}>Information:</Text>
-                    <Text style={styles.bodytext}></Text>
+                    <Text style={styles.subheading}>Information:</Text>
+                    <Text style={styles.bodytext}>The Nile is a river in Egypt.</Text>
                 </View>
+                {/* contact info */}
             </ScrollView>
         </Box>
         </NativeBaseProvider>
@@ -41,6 +50,8 @@ const itemstyles = StyleSheet.create({
       backgroundColor: '#fff',
       //alignItems: 'left',
       justifyContent: 'center',
-      padding: 10
+      padding: 10,
+      borderColor: 'black',
+      borderWidth: 1
     },
 });
