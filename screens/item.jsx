@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider, Box, ScrollView, Text, View, Image} from "native-base";
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import styles from '../style.js'
 
 export const ItemScreen = ({navigation}) => {
     return (
@@ -15,16 +16,16 @@ export const ItemScreen = ({navigation}) => {
                         h={300} 
                         resizeMode="contain"
                 />
+                <Text style={styles.heading}>Vendor name: The Cucumber Chef</Text>
+                <Text>Cost, Location</Text>
+                <Text>Menu coming below lol</Text>
             </ScrollView>
-        <Text>Vendor name: The Cucumber Chef</Text>
-        <Text>Cost, Location</Text>
-        <Text>Menu coming below lol</Text>
         </Box>
         </NativeBaseProvider>
     );
 }
 
-const styles = StyleSheet.create({
+const itemstyles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
