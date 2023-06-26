@@ -10,9 +10,9 @@ export const ItemScreen = ({navigation}) => {
         <NativeBaseProvider>
         <Box safeArea flex={1} bg={Colors.white}>
             {/* header - lowkey wasnt working anyways :( */}
-            <View style={styles.header}>
+            {/* <View style={styles.header}>
             <Text>Header, we might not need this so we can delete</Text>
-            </View>
+            </View> */}
             <ScrollView px={5} showsVerticalScrollIndicator={false} style={{backgroundColor: 'orange'}}>
                 <Image source={require("../assets/images/cucumber.jpg")} 
                         alt="cucumber image" 
@@ -41,26 +41,76 @@ export const ItemScreen = ({navigation}) => {
                 
                 {/* MENU */}
                 <Text style={[styles.heading, {textAlign: 'center'}]}>Menu</Text>
-                <Flex style={itemstyles.flex}>
-                <Image source={require("../assets/images/banchan.jpg")} 
+                <Flex flexWrap= "wrap"
+                        direction= "row"
+                        justifyContent= "space-between"
+                        px= {6}>
+                    {/* Pressables are causing problems */}
+                    <Pressable style={itemstyles.pressable}>
+                    <Box>
+                        <Image source={require("../assets/images/banchan.jpg")} 
                                alt="banchan1"
                                w="full"
                                h={24}
                                resizeMode="contain"/>
                         <Text>Item Name</Text>
+                    </Box>
+                    </Pressable>
+
+                    <Pressable style={itemstyles.pressable}>
+                        <Box>
                         <Image source={require("../assets/images/banchan.jpg")} 
                                alt="banchan2"
                                w="full"
                                h={24}
                                resizeMode="contain"/>
                         <Text>Item Name</Text>
-
-
-                    {/* Pressables are causing problems */}
-                    {/* <Pressable style={itemstyles.pressable}>
+                        </Box>
                     </Pressable>
+
                     <Pressable style={itemstyles.pressable}>
-                    </Pressable> */}
+                        <Box>
+                        <Image source={require("../assets/images/banchan.jpg")} 
+                               alt="banchan2"
+                               w="full"
+                               h={24}
+                               resizeMode="contain"/>
+                        <Text>Item Name</Text>
+                        </Box>
+                    </Pressable>
+
+                    <Pressable style={itemstyles.pressable}>
+                        <Box>
+                        <Image source={require("../assets/images/banchan.jpg")} 
+                               alt="banchan2"
+                               w="full"
+                               h={24}
+                               resizeMode="contain"/>
+                        <Text>Item Name</Text>
+                        </Box>
+                    </Pressable>
+                    
+                    <Pressable style={itemstyles.pressable}>
+                        <Box>
+                        <Image source={require("../assets/images/banchan.jpg")} 
+                               alt="banchan2"
+                               w="full"
+                               h={24}
+                               resizeMode="contain"/>
+                        <Text>Item Name</Text>
+                        </Box>
+                    </Pressable>
+                    
+                    <Pressable style={itemstyles.pressable}>
+                        <Box>
+                        <Image source={require("../assets/images/banchan.jpg")} 
+                               alt="banchan2"
+                               w="full"
+                               h={24}
+                               resizeMode="contain"/>
+                        <Text>Item Name</Text>
+                        </Box>
+                    </Pressable>
                 </Flex>
             </ScrollView>
         </Box>
@@ -79,20 +129,29 @@ const itemstyles = StyleSheet.create({
       borderColor: 'black',
       borderWidth: 1
     },
-    flex: {
-        flexWrap: "wrap",
-        direction: "row",
-        justifyContent: "space-between",
-        px: 6
-    },
+
+    //doesn't like flex here for some reason
+
+    // flex: {
+    //     flexWrap: "wrap",
+    //     direction: "row",
+    //     justifyContent: "space-between",
+    //     px: 6
+    // },
     pressable: {
         w: '47%', 
-        bg: "white",
+        backgroundColor: "white",
         rounded: "md",
         shadow: 2,
         pt: 0.3,
         my: 3,
         pb: 2,
-        overflow: "hidden"
-    }
+        overflow: "hidden",
+        padding: 10,
+        margin: 2,
+        marginTop: 10,
+        marginBottom: 10,
+        borderRadius: 10
+    },
+    
 });
