@@ -15,13 +15,13 @@ const styles = StyleSheet.create({
         color: 'white',
         backgroundColor: 'blue',
         flex: 1,
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         padding: 10,
     },
     bodytext: {
         flex: 1,
         backgroundColor: 'red',
-        fontFamily: 'AvenirNext',
+        fontFamily: 'AvenirNext-Regular',
         //#bold for now because regular was very thin
         fontWeight: "bold",
         padding: 10
