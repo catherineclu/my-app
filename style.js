@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      //backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -12,15 +12,16 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         fontStyle: 'italic',
-        color: 'white',
-        backgroundColor: 'blue',
+        color: 'black',
+        //backgroundColor: 'blue',
         flex: 1,
         fontFamily: 'AvenirNext-Regular',
         padding: 10,
+        
     },
     bodytext: {
         flex: 1,
-        backgroundColor: 'red',
+        //backgroundColor: 'red',
         fontFamily: 'AvenirNext-Regular',
         //#bold for now because regular was very thin
         fontWeight: "bold",
@@ -28,16 +29,24 @@ const styles = StyleSheet.create({
     },
     subheading: {
         fontWeight: 'bold',
-        backgroundColor: 'green',
+        //backgroundColor: 'green',
         padding: 10
     },
     header:{
-        flex: 0.2,
-        backgroundColor: 'magenta',
-        //alignItems: 'left',
-        justifyContent: 'center',
-        padding: 5,
-      }
+        //flex: 0.2,
+        // justifyContent: 'center',
+        // padding: 5,
+        width: "100%",
+        height: 75,
+        backgroundColor: "#FFF9A6",
+        alignItems: 'center',
+        flexDirection: "row",
+    },
+    layout: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+    },
 });
 
 export default styles;
