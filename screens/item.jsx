@@ -57,10 +57,10 @@ export const ItemScreen = ({navigation}) => {
 
 
                     {/* Pressables are causing problems */}
-                    {/* <Pressable style={itemstyles.pressable}>
+                    <Pressable style={itemstyles.pressable}>
                     </Pressable>
                     <Pressable style={itemstyles.pressable}>
-                    </Pressable> */}
+                    </Pressable>
                 </Flex>
             </ScrollView>
         </Box>
