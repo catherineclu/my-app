@@ -2,13 +2,13 @@ import React from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider, Box, ScrollView, Text, View, Image, Flex} from "native-base";
+
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import styles from '../style.js'
 
 export const ItemScreen = ({navigation}) => {
     return (
         <NativeBaseProvider>
-        <View style={styles.layout}> 
         <View style={styles.header}>
                 <Pressable onPress={() => navigation.navigate('HomeScreen')}>
                     <Text style={{fontSize: 30, fontWeight: "bold", textAlign: "center", marginLeft: 110}}>[App Name]</Text>
@@ -124,7 +124,6 @@ export const ItemScreen = ({navigation}) => {
                 </Flex>
             </ScrollView>
         </Box>
-        </View>
         </NativeBaseProvider>
 
     );
