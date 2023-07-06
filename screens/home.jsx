@@ -25,9 +25,9 @@ export const HomeScreen = ({navigation}) => {
                     </View>
                 </View>
             </Pressable>
-            {/* <Pressable>
+            <Pressable>
                 <Text style={styles.vendor} onPress={() => navigation.navigate('LoginScreen')}>Link to Login Page</Text>
-            </Pressable> */}
+            </Pressable>
         </SafeAreaView>
     );
 }
