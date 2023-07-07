@@ -1,9 +1,35 @@
-import React from 'react';
+//Used this tutorial: https://www.youtube.com/watch?v=ql4J6SpLXZA
+
+import React, {useState} from 'react';
 import { KeyboardAvoidingView, View, Text, TextInput, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable, TouchableOpacity } from 'react-native';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
+import { auth } from '../firebaseConfig.js';
 import styles from '../style.js'
 
 export const LoginScreen = ({navigation}) => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const handleSignUp = () => {
+        auth
+            .createUserWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log('Registered with:', user.email);
+            })
+            .catch(error => alert(error.message))
+    }
+
+    const handleLogin = () => {
+        auth    
+            .signInWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log('Logged in with:', user.email);
+            })
+            .catch(error => alert(error.message))
+        }
+
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
@@ -17,13 +43,13 @@ export const LoginScreen = ({navigation}) => {
             <KeyboardAvoidingView style={styles.container} behavior="padding">
                 <View style={loginstyles.inputContainer}>
                     <TextInput placeholder="Email" 
-                                // value={} 
-                                // onChangeText={text => } 
+                                value={email} 
+                                onChangeText={text => setEmail(text)} 
                                 style={loginstyles.input}
                                 />
                     <TextInput placeholder="Password" 
-                                // value={} 
-                                // onChangeText={text => } 
+                                value={password} 
+                                onChangeText={text => setPassword(text)} 
                                 style={loginstyles.input}
                                 secureTextEntry
                                 />
@@ -31,12 +57,12 @@ export const LoginScreen = ({navigation}) => {
 
                 <View style={loginstyles.buttonContainer}>
                     <TouchableOpacity
-                        onPress={() => { }}
+                        onPress={handleLogin}
                         style={loginstyles.button}>
                         <Text style={loginstyles.buttonText}>Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => { }}
+                        onPress={handleSignUp}
                         style={[loginstyles.button, loginstyles.buttonOutline]}>
                         <Text style={loginstyles.buttonOutlineText} >Register</Text>
                     </TouchableOpacity>
