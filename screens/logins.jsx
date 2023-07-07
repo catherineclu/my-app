@@ -1,5 +1,6 @@
+import { KeyboardAvoidingView } from 'native-base';
 import React from 'react';
-import { View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable } from 'react-native';
+import { KeyboardAvoidingView, View, Text, TextInput, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../style.js'
 
 export const LoginScreen = ({navigation}) => {
@@ -13,9 +14,38 @@ export const LoginScreen = ({navigation}) => {
                 
             </View>
             <Text>Login</Text>
-            {/* <Pressable>
-                <Text style={styles.vendor} onPress={() => navigation.navigate('LoginScreen')}>Link to Login Page</Text>
-            </Pressable> */}
+            <KeyboardAvoidingView style={styles.container} behavior="padding">
+                <View style={loginstyles.inputContainer}>
+                    <TextInput placeholder="Email" 
+                                // value={} 
+                                // onChangeText={text => } 
+                                style={loginstyles.input}
+                                />
+                    <TextInput placeholder="Password" 
+                                // value={} 
+                                // onChangeText={text => } 
+                                style={loginstyles.input}
+                                secureTextEntry
+                                />
+                </View>
+
+                <View style={loginstyles.buttonContainer}>
+                    <TouchableOpacity
+                        onPress={() => { }}
+                        style={loginstyles.button}>
+                        <Text style={loginstyles.button}>Login</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => { }}
+                        style={[loginstyles.button, loginstyles.buttonOutline]}>
+                        <Text styles={loginstyles.buttonOutlineText} >Login</Text>
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }
+
+const loginstyles = StyleSheet.create({
+
+})
