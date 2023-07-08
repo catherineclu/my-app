@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         //backgroundColor: 'blue',
         flex: 1,
         fontFamily: 'AvenirNext-Regular',
-        padding: 10,
+        padding: "2%",
         
     },
     bodytext: {

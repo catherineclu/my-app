@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable } from 'react-native';
+import { TouchableOpacity, ScrollView, View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import styles from '../style.js';
 
 export const ItemScreen = ({navigation}) => {
     return (
@@ -11,12 +12,33 @@ export const ItemScreen = ({navigation}) => {
                     <Image style={{width: 40, height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
                 </Pressable>
             </View>
-            <Text>Item Screen</Text>
+            <ScrollView px={5} showsVerticalScrollIndicator={false} >
+            <View style={ItemStyles.imagecontainer}>
+                <Image source={require("../assets/images/cucumber.jpg")} 
+                        alt="cucumber image" 
+                        w="full" 
+                        h={300} 
+                        resizeMode="contain"
+                        ></Image>
+                <Text style={styles.heading}>Cucumber Kimchi</Text>
+                <Text style={styles.bodytext}>Item description: Cucumber kimchi is a refreshing Korean side dish</Text>
+            </View>
+            {/* <View style={styles.informationContainer}>
+                <Text>Item description: Cucumber kimchi is a refreshing Korean side dish</Text>
+            </View> */}
+            </ScrollView>
+            <View style={ItemStyles.buttonContainer}>
+                <TouchableOpacity
+                        onPress={() => navigation.navigate('CartScreen')}
+                        style={ItemStyles.button}>
+                        <Text style={ItemStyles.buttonText}>Add to Cart</Text>
+                    </TouchableOpacity>
+            </View>
         </SafeAreaView>
     );
 }
 
-const styles = StyleSheet.create({
+const ItemStyles = StyleSheet.create({
     header: {
         width: "100%",
         height: 75,
@@ -24,22 +46,47 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: "row",
     },
-    layout: {
-        flex: 1,
+    imagecontainer:{
+        //backgroundColor: 'blue',
         alignItems: 'center',
-        justifyContent: 'flex-start'
+        padding: "5%",
+        //justifyContent: 'center',
     },
-    vendor: {
-        width: 350,
-        height: 250,
-        backgroundColor: 'white',
-        margin: 16,
-        borderRadius: 2,
-        shadowColor: 'black',
-        shadowOpacity: 0.3,
-        shadowRadius: 1,
-        shadowOffset: { height: 1, width: 0.3 }
+    buttonContainer: {
+        width: '60%', //probably need to adjust this
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 40,
+    },
+    button: {
+        backgroundColor: "blue",
+        width: "100%",
+        padding: 15,
+        borderRadius: 10,
+        alignItems: "center"
+    },
+    buttonText:{
+        color: "white",
+        fontWeight: "700",
+        fontSize: 16
+    },
 
-    }
+
+    // informationContainer: {
+        
+    //     flex:1,
+    // },
+    // vendor: {
+    //     width: 350,
+    //     height: 250,
+    //     backgroundColor: 'white',
+    //     margin: 16,
+    //     borderRadius: 2,
+    //     shadowColor: 'black',
+    //     shadowOpacity: 0.3,
+    //     shadowRadius: 1,
+    //     shadowOffset: { height: 1, width: 0.3 }
+
+    // }
   })
 
