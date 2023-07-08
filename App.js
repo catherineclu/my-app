@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 /*import { StyleSheet, Text, View } from 'react-native';*/
 import { HomeScreen } from './screens/home';
-import {ItemScreen} from './screens/item';
+import {VendorScreen} from './screens/vendor';
 import {CartScreen} from './screens/cart';
 import {LoginScreen} from './screens/logins';
 
@@ -15,7 +15,7 @@ const MyStack = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="HomeScreen">
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="ItemScreen" component={ItemScreen} />
+        <Stack.Screen name="ItemScreen" component={VendorScreen} />
         <Stack.Screen name="CartScreen" component={CartScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         

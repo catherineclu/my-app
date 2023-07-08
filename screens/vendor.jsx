@@ -6,7 +6,7 @@ import { NativeBaseProvider, Box, ScrollView, Text, View, Image, Flex} from "nat
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import styles from '../style.js'
 
-export const ItemScreen = ({navigation}) => {
+export const VendorScreen = ({navigation}) => {
     return (
         <NativeBaseProvider>
         <View style={styles.header}>
