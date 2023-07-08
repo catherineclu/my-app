@@ -6,6 +6,7 @@ import { HomeScreen } from './screens/home';
 import {VendorScreen} from './screens/vendor';
 import {CartScreen} from './screens/cart';
 import {LoginScreen} from './screens/logins';
+import {ItemScreen} from './screens/item';
 
 
 const Stack = createNativeStackNavigator();
@@ -15,10 +16,10 @@ const MyStack = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="HomeScreen">
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="ItemScreen" component={VendorScreen} />
+        <Stack.Screen name="VendorScreen" component={VendorScreen} />
         <Stack.Screen name="CartScreen" component={CartScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        
+        <Stack.Screen name="ItemScreen" component={ItemScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

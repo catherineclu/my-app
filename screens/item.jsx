@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
-export const HomeScreen = ({navigation}) => {
+export const ItemScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
@@ -10,24 +10,8 @@ export const HomeScreen = ({navigation}) => {
                 <Pressable onPress={() => navigation.navigate('CartScreen')}>
                     <Image style={{width: 40, height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
                 </Pressable>
-                
             </View>
-            <Pressable style={styles.vendor} onPress={() => navigation.navigate('VendorScreen')}>
-                <Image style={{width: "100%", height: "70%"}} source={require("../assets/dumplings.jpeg")}/>
-                <View style={{height: "30%", backgroundColor: "white", flexDirection: "row", marginTop: 5}}>
-                    <View style={{marginLeft: 5, flex: 1}}>
-                        <Text style={{fontSize: 15, fontWeight: "bold"}}>[Vendor Name]</Text>
-                        <Text>[Cuisine Type]</Text>
-                    </View>
-                    <View style={{alignItems: "flex-end", marginRight: 5, flex: 1}}>
-                        <Text>[Location]</Text>
-                        <Text>[Pickup Time]</Text>
-                    </View>
-                </View>
-            </Pressable>
-            <Pressable onPress={() => navigation.navigate('LoginScreen')}>
-                <Text style={styles.vendor}>Link to Login Page</Text>
-            </Pressable>
+            <Text>Item Screen</Text>
         </SafeAreaView>
     );
 }

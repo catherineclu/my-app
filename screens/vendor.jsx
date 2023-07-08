@@ -56,7 +56,7 @@ export const VendorScreen = ({navigation}) => {
                         justifyContent= "space-between"
                         px= {6}>
                     {/* Pressables are causing problems */}
-                    <Pressable style={itemstyles.pressable}>
+                    <Pressable style={itemstyles.pressable} onPress={() => navigation.navigate('ItemScreen')}>
                     <Box>
                         <Image source={require("../assets/images/banchan.jpg")} 
                                alt="banchan1"
