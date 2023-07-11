@@ -1,8 +1,20 @@
 import React from 'react';
-import { View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable, TouchableOpacity } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { auth } from '../firebaseConfig';
 
-export const HomeScreen = ({navigation}) => {
+export const HomeScreen = ({}) => {
+    navigation = useNavigation()
+    
+    const handleSignOut = () => {
+        auth
+            .signOut()
+            .then(() => {
+                navigation.replace("HomeScreen")
+            })
+            .catch(error => alert(error.message))
+    }
+
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
@@ -28,6 +40,12 @@ export const HomeScreen = ({navigation}) => {
             <Pressable onPress={() => navigation.navigate('LoginScreen')}>
                 <Text style={styles.vendor}>Link to Login Page</Text>
             </Pressable>
+
+            <View> 
+                <Text>Email: {auth.currentUser?.email}</Text>
+                <Button styles={styles.button} onPress={handleSignOut} title="Sign out">
+                </Button>
+            </View>
         </SafeAreaView>
     );
 }
@@ -55,7 +73,18 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 1,
         shadowOffset: { height: 1, width: 0.3 }
-
-    }
+    },
+    button: {
+        backgroundColor: "blue",
+        width: "100%",
+        padding: 15,
+        borderRadius: 10,
+        alignItems: "center"
+    },
+    buttonText:{
+        color: "black",
+        fontWeight: "700",
+        fontSize: 16
+    },
   })
 

@@ -1,14 +1,27 @@
 //Used this tutorial: https://www.youtube.com/watch?v=ql4J6SpLXZA
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { KeyboardAvoidingView, View, Text, TextInput, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable, TouchableOpacity } from 'react-native';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
 import { auth } from '../firebaseConfig.js';
 import styles from '../style.js'
+import { useNavigation } from '@react-navigation/native';
 
-export const LoginScreen = ({navigation}) => {
+export const LoginScreen = ({}) => {
+    navigation = useNavigation()
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                navigation.replace("HomeScreen")
+            }
+        })
+
+        return unsubscribe
+    }, [])
 
     const handleSignUp = () => {
         auth
