@@ -3,6 +3,9 @@ import { TouchableOpacity, ScrollView, View, Text, Button, Image, SafeAreaView, 
 import { NavigationContainer } from '@react-navigation/native';
 import styles from '../style.js';
 
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { NativeBaseProvider, HStack, NumericInput } from 'native-base';
+
 export const ItemScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.layout}>
@@ -22,10 +25,9 @@ export const ItemScreen = ({navigation}) => {
                         ></Image>
                 <Text style={styles.heading}>Cucumber Kimchi</Text>
                 <Text style={styles.bodytext}>Item description: Cucumber kimchi is a refreshing Korean side dish</Text>
+
             </View>
-            {/* <View style={styles.informationContainer}>
-                <Text>Item description: Cucumber kimchi is a refreshing Korean side dish</Text>
-            </View> */}
+            
             </ScrollView>
             <View style={ItemStyles.buttonContainer}>
                 <TouchableOpacity
