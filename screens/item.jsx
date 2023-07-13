@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity, ScrollView, View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import styles from '../style.js';
+import Counter from "./counter.jsx"
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { NativeBaseProvider, HStack, NumericInput } from 'native-base';
@@ -12,7 +13,7 @@ export const ItemScreen = ({navigation}) => {
             <View style={styles.header}>
                 <Text style={{fontSize: 30, fontWeight: "bold", textAlign: "center", marginLeft: 110}}>[App Name]</Text>
                 <Pressable onPress={() => navigation.navigate('CartScreen')}>
-                    <Image style={{width: 40, height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
+                    <Image style={{height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
                 </Pressable>
             </View>
             <ScrollView px={5} showsVerticalScrollIndicator={false} >
@@ -27,7 +28,7 @@ export const ItemScreen = ({navigation}) => {
                 <Text style={styles.bodytext}>Item description: Cucumber kimchi is a refreshing Korean side dish</Text>
 
             </View>
-            
+            <Counter />
             </ScrollView>
             <View style={ItemStyles.buttonContainer}>
                 <TouchableOpacity
