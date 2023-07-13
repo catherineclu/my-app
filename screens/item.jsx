@@ -26,9 +26,9 @@ export const ItemScreen = ({navigation}) => {
                         ></Image>
                 <Text style={styles.heading}>Cucumber Kimchi</Text>
                 <Text style={styles.bodytext}>Item description: Cucumber kimchi is a refreshing Korean side dish</Text>
-
+                <Counter />
             </View>
-            <Counter />
+            
             </ScrollView>
             <View style={ItemStyles.buttonContainer}>
                 <TouchableOpacity
