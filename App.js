@@ -7,6 +7,7 @@ import {VendorScreen} from './screens/vendor';
 import {CartScreen} from './screens/cart';
 import {LoginScreen} from './screens/logins';
 import {ItemScreen} from './screens/item';
+import { NewLoginScreen } from './screens/login';
 
 
 const Stack = createNativeStackNavigator();
@@ -20,6 +21,7 @@ const MyStack = () => {
         <Stack.Screen name="CartScreen" component={CartScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="ItemScreen" component={ItemScreen} />
+        <Stack.Screen name="NewLoginScreen" component={NewLoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -8,6 +8,7 @@ import styles from '../style.js'
 import { useNavigation } from '@react-navigation/native';
 
 export const LoginScreen = ({}) => {
+
     navigation = useNavigation()
 
     const [email, setEmail] = useState('')
@@ -57,12 +58,12 @@ export const LoginScreen = ({}) => {
                 <View style={loginstyles.inputContainer}>
                     <TextInput placeholder="Email" 
                                 value={email} 
-                                onChangeText={text => setEmail(text)} 
+                                onChangeText={text => setRegisterEmail(text)} 
                                 style={loginstyles.input}
                                 />
                     <TextInput placeholder="Password" 
                                 value={password} 
-                                onChangeText={text => setPassword(text)} 
+                                onChangeText={text => setRegisterPassword(text)} 
                                 style={loginstyles.input}
                                 secureTextEntry
                                 />

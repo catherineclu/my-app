@@ -3,17 +3,20 @@ import { View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressa
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { auth } from '../firebaseConfig';
 
-export const HomeScreen = ({}) => {
-    navigation = useNavigation()
+export const HomeScreen = ({navigation}) => {
+
+    //under construction
+
+    // navigation = useNavigation()
     
-    const handleSignOut = () => {
-        auth
-            .signOut()
-            .then(() => {
-                navigation.replace("HomeScreen")
-            })
-            .catch(error => alert(error.message))
-    }
+    // const handleSignOut = () => {
+    //     auth
+    //         .signOut()
+    //         .then(() => {
+    //             navigation.replace("HomeScreen")
+    //         })
+    //         .catch(error => alert(error.message))
+    // }
 
     return (
         <SafeAreaView style={styles.layout}>
@@ -37,15 +40,15 @@ export const HomeScreen = ({}) => {
                     </View>
                 </View>
             </Pressable>
-            <Pressable onPress={() => navigation.navigate('LoginScreen')}>
+            <Pressable onPress={() => navigation.navigate('NewLoginScreen')}>
                 <Text style={styles.vendor}>Link to Login Page</Text>
             </Pressable>
 
-            <View> 
+            {/* <View> 
                 <Text>Email: {auth.currentUser?.email}</Text>
                 <Button styles={styles.button} onPress={handleSignOut} title="Sign out">
                 </Button>
-            </View>
+            </View> */}
         </SafeAreaView>
     );
 }
