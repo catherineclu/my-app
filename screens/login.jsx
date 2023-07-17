@@ -16,7 +16,7 @@ export const NewLoginScreen = ({navigation}) => {
     const[password, setPassword] = useState('');
 
     const RegisterUser = ()=>{
-        signInWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password)
         .then((re)=>{
             setIsSignedIn(true);
             navigation.replace("HomeScreen")
@@ -26,7 +26,8 @@ export const NewLoginScreen = ({navigation}) => {
         })
     }
     const LogInUser = ()=>{
-        createUserWithEmailAndPassword(auth, email, password)
+        
+        signInWithEmailAndPassword(auth, email, password)
         .then((re)=>{
             setIsSignedIn(true);
             navigation.replace("HomeScreen")
@@ -73,22 +74,26 @@ export const NewLoginScreen = ({navigation}) => {
                 </View>
 
                 <View style={loginstyles.buttonContainer}>
-                    <TouchableOpacity
-                        onPress={LogInUser}
-                        style={loginstyles.button}>
-                        <Text style={loginstyles.buttonText}>Login</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={RegisterUser}
-                        style={[loginstyles.button, loginstyles.buttonOutline]}>
-                        <Text style={loginstyles.buttonOutlineText} >Register</Text>
-                    </TouchableOpacity>
+                    {isSignedIn === false?
+                    <View>
+                        <TouchableOpacity
+                            onPress={LogInUser}
+                            style={loginstyles.button}>
+                            <Text style={loginstyles.buttonText}>Login</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={RegisterUser}
+                            style={[loginstyles.button, loginstyles.buttonOutline]}>
+                            <Text style={loginstyles.buttonOutlineText} >Register</Text>
+                        </TouchableOpacity>
+                    </View>
+                    :
                     <TouchableOpacity
                         onPress={SignOutUser}
                         style={[loginstyles.button, loginstyles.buttonOutline]}>
-                        <Text style={loginstyles.buttonOutlineText} >Sign OUt</Text>
+                        <Text style={loginstyles.buttonOutlineText} >Sign Out</Text>
                     </TouchableOpacity>
-                    
+                    }                   
                 </View>
             </KeyboardAvoidingView>
         </SafeAreaView>
