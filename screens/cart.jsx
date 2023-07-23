@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { db } from '../firebaseConfig';
 import { NavigationContainer } from '@react-navigation/native';
-import { ScrollView, Text, View, Image, Button} from "react-native";
+import { ScrollView, Text, View, Image, Button, Pressable} from "react-native";
 import { useEffect } from 'react';
-import { getDocs, collection } from 'firebase/firestore'; // or get doc
+import { addDoc, getDocs, collection } from 'firebase/firestore'; // or get doc
 import { isReactNative } from '@firebase/util';
 
 export const CartScreen = ({navigation}) => {
@@ -11,7 +11,11 @@ export const CartScreen = ({navigation}) => {
     // //have a use state variable for the collection
     // const [user, setUser] = useState([]);
     // //accesses collection
-    // const userCollectionRef = collection(db, "user")
+    const usersCollectionRef = collection(db, "users")
+
+    const createUser = async () => {
+        await addDoc(usersCollectionRef, { })
+    };
     
     // useEffect(() => {
     //     //function to access data through use effect async function
@@ -35,6 +39,9 @@ export const CartScreen = ({navigation}) => {
     return (
         <View>
             <Text>Cart</Text>
+            <Pressable onPress={createUser}>
+                <Text>add</Text>
+            </Pressable>
             {/* <View>
                
                 {user.map((oneuser) => { 

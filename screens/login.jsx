@@ -7,7 +7,8 @@ import { auth } from '../firebaseConfig.js';
 import styles from '../style.js'
 import { useNavigation } from '@react-navigation/native';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
-
+import { db } from '../firebaseConfig';
+import { addDoc, collection } from 'firebase/firestore';
 
 export const NewLoginScreen = ({navigation}) => {
 
@@ -16,7 +17,18 @@ export const NewLoginScreen = ({navigation}) => {
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
 
+    const [users, setUsers] = useState([]);
+    const [newDeliveryAddress, setDeliveryAddress] = useState("")
+
+    const [newCart, setCart] = useState([])
+    const usersCollectionRef = collection(db, "users")
+
+    const createUser = async () => {
+        await addDoc(usersCollectionRef, { cart: newCart, email: email, password: password })
+    };
+
     const RegisterUser = ()=>{
+        createUser
         createUserWithEmailAndPassword(auth, email, password)
         .then((re)=>{
             setIsSignedIn(true);
@@ -27,7 +39,6 @@ export const NewLoginScreen = ({navigation}) => {
         })
     }
     const LogInUser = ()=>{
-        
         signInWithEmailAndPassword(auth, email, password)
         .then((re)=>{
             setIsSignedIn(true);
