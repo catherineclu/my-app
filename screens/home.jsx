@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable, TouchableOpacity } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { auth } from '../firebaseConfig';
+import { signOut, onAuthStateChanged } from 'firebase/auth';
 
 export const HomeScreen = ({navigation}) => {
 
@@ -17,6 +18,19 @@ export const HomeScreen = ({navigation}) => {
     //         })
     //         .catch(error => alert(error.message))
     // }
+    
+
+    const SignOutUser = ()=>{
+        signOut(auth)
+        .then((re) => {
+            navigation.replace("NewLoginScreen");
+            console.log("signed out")
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+
 
     return (
         <SafeAreaView style={styles.layout}>
@@ -40,15 +54,17 @@ export const HomeScreen = ({navigation}) => {
                     </View>
                 </View>
             </Pressable>
-            <Pressable onPress={() => navigation.navigate('NewLoginScreen')}>
+            {/* <Pressable onPress={() => navigation.navigate('NewLoginScreen')}>
                 <Text style={styles.vendor}>Link to Login Page</Text>
-            </Pressable>
+            </Pressable> */}
 
-            {/* <View> 
-                <Text>Email: {auth.currentUser?.email}</Text>
-                <Button styles={styles.button} onPress={handleSignOut} title="Sign out">
+
+
+            <View> 
+                <Button styles={styles.button} onPress={SignOutUser} title="Sign out">
                 </Button>
-            </View> */}
+            </View>
+            
         </SafeAreaView>
     );
 }

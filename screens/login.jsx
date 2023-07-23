@@ -8,6 +8,7 @@ import styles from '../style.js'
 import { useNavigation } from '@react-navigation/native';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 
+
 export const NewLoginScreen = ({navigation}) => {
 
     const[isSignedIn, setIsSignedIn] = useState('');
@@ -52,9 +53,9 @@ export const NewLoginScreen = ({navigation}) => {
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
                 <Text style={{fontSize: 30, fontWeight: "bold", textAlign: "center", marginLeft: 110}}>[App Name]</Text>
-                <Pressable onPress={() => navigation.navigate('CartScreen')}>
+                {/* <Pressable onPress={() => navigation.navigate('CartScreen')}>
                     <Image style={{width: 40, height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
-                </Pressable>
+                </Pressable> */}
                 
             </View>
             <Text>Login</Text>
@@ -74,26 +75,28 @@ export const NewLoginScreen = ({navigation}) => {
                 </View>
 
                 <View style={loginstyles.buttonContainer}>
-                    {isSignedIn === false?
-                    <View>
-                        <TouchableOpacity
-                            onPress={LogInUser}
-                            style={loginstyles.button}>
-                            <Text style={loginstyles.buttonText}>Login</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={RegisterUser}
-                            style={[loginstyles.button, loginstyles.buttonOutline]}>
-                            <Text style={loginstyles.buttonOutlineText} >Register</Text>
-                        </TouchableOpacity>
-                    </View>
+
+                <View>
+                    <TouchableOpacity
+                        onPress={LogInUser}
+                        style={loginstyles.button}>
+                        <Text style={loginstyles.buttonText}>Login</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={RegisterUser}
+                        style={[loginstyles.button, loginstyles.buttonOutline]}>
+                        <Text style={loginstyles.buttonOutlineText} >Register</Text>
+                    </TouchableOpacity>
+                </View>
+
+                    {/* {isSignedIn === false?
                     :
                     <TouchableOpacity
                         onPress={SignOutUser}
                         style={[loginstyles.button, loginstyles.buttonOutline]}>
                         <Text style={loginstyles.buttonOutlineText} >Sign Out</Text>
                     </TouchableOpacity>
-                    }                   
+                    }                    */}
                 </View>
             </KeyboardAvoidingView>
         </SafeAreaView>
