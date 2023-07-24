@@ -3,18 +3,20 @@ import { db } from '../firebaseConfig';
 import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView, Text, View, Image, Button, Pressable} from "react-native";
 import { useEffect } from 'react';
-import { addDoc, getDocs, collection } from 'firebase/firestore'; // or get doc
+import { doc, addDoc, getDocs, collection } from 'firebase/firestore'; // or get doc
 import { isReactNative } from '@firebase/util';
 
 export const CartScreen = ({navigation}) => {
 
     // //have a use state variable for the collection
-    // const [user, setUser] = useState([]);
-    // //accesses collection
-    const usersCollectionRef = collection(db, "users")
+
+    // accesses document for specific user - we need to replace this with a variable for the user signed in
+    const usersDocRef = doc(db, "users/b6UrUPoQgEQOsvgEA7ev")
+    const cartCollectionRef = collection(usersDocRef, "cart")
 
     const createUser = async () => {
-        await addDoc(usersCollectionRef, { })
+        await //addDoc(usersCollectionRef, { email: "email", password: "password" })
+        addDoc(cartCollectionRef, {name: "sample", quantity: 0, note: ""})
     };
     
     // useEffect(() => {

@@ -23,12 +23,8 @@ export const NewLoginScreen = ({navigation}) => {
     const [newCart, setCart] = useState([])
     const usersCollectionRef = collection(db, "users")
 
-    const createUser = async () => {
-        await addDoc(usersCollectionRef, { cart: newCart, email: email, password: password })
-    };
-
     const RegisterUser = ()=>{
-        createUser
+        addDoc(usersCollectionRef, {email: email, password: password, address: newDeliveryAddress })
         createUserWithEmailAndPassword(auth, email, password)
         .then((re)=>{
             setIsSignedIn(true);
