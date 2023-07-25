@@ -21,6 +21,7 @@ export const CartScreen = ({navigation}) => {
         addDoc(cartCollectionRef, {name: "sample", quantity: 0, note: ""})
     };
     
+    
     // useEffect(() => {
     //     //function to access data through use effect async function
     //     const getUser = async () => {
