@@ -8,7 +8,7 @@ import styles from '../style.js'
 import { useNavigation } from '@react-navigation/native';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 import { db } from '../firebaseConfig';
-import { addDoc, collection } from 'firebase/firestore';
+import { doc, setDoc, addDoc, collection } from 'firebase/firestore';
 
 export const NewLoginScreen = ({navigation}) => {
 
@@ -28,12 +28,14 @@ export const NewLoginScreen = ({navigation}) => {
         createUserWithEmailAndPassword(auth, email, password)
         .then((re)=>{
             setIsSignedIn(true);
-            addDoc(collection(db, "users", auth.currentUser.uid), {email: email, password: password, address: newDeliveryAddress })
+            setDoc(doc(db, "users", auth.currentUser.uid), {email: email, password: password, address: newDeliveryAddress })
+            console.log("signed in")
             navigation.replace("HomeScreen")
         })
         .catch((re)=>{
             console.log(re);
         })
+        
     }
     const LogInUser = ()=>{
         signInWithEmailAndPassword(auth, email, password)
