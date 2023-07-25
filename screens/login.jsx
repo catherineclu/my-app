@@ -21,13 +21,14 @@ export const NewLoginScreen = ({navigation}) => {
     const [newDeliveryAddress, setDeliveryAddress] = useState("")
 
     const [newCart, setCart] = useState([])
-    const usersCollectionRef = collection(db, "users")
+    //const usersCollectionRef = collection(db, "users")
 
     const RegisterUser = ()=>{
-        addDoc(usersCollectionRef, {email: email, password: password, address: newDeliveryAddress })
+        
         createUserWithEmailAndPassword(auth, email, password)
         .then((re)=>{
             setIsSignedIn(true);
+            addDoc(collection(db, "users", auth.currentUser.uid), {email: email, password: password, address: newDeliveryAddress })
             navigation.replace("HomeScreen")
         })
         .catch((re)=>{
