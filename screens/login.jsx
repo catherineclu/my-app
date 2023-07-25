@@ -1,4 +1,5 @@
 //Used tutorial: https://www.youtube.com/watch?v=20TSEoJkg5k
+//for contributor
 
 import React, {useEffect, useState} from 'react';
 import { KeyboardAvoidingView, View, Text, TextInput, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable, TouchableOpacity, StatusBar, useColorScheme } from 'react-native';
