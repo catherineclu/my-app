@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 /*import { StyleSheet, Text, View } from 'react-native';*/
@@ -16,22 +16,43 @@ const Stack = createNativeStackNavigator();
 
 const MyStack = () => {
     const auth = getAuth();
-    const[homeRoute, setHomeRoute] = useState('');
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    const uid = user.uid;
-    setHomeRoute("HomeScreen")
-    // ...
-  } else {
-    // User is signed out
-    // ...
-    setHomeRoute("NewLoginScreen")
-  }
-});
+    const user = auth.currentUser;
+    const [homeRoute, setHomeRoute] = useState('');
+    
+    useMemo(()=>{
+        if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        // ...
+            console.log("signed in")
+            setHomeRoute("HomeScreen")
+            
+        } else {
+            console.log("signed out")
+            setHomeRoute("NewLoginScreen")
+            
+        // No user is signed in.
+        }
+        console.log(homeRoute)
+    }, [])
+
+    
+    // onAuthStateChanged(auth, (user) => {
+    // if (user) {
+    //     const uid = user.uid;
+    //     
+    //     // ...
+    // } else {
+    //     // User is signed out
+    //     // ...
+    //     
+    // }
+    // });
 
 
   return (
     <NavigationContainer>
+        {console.log(homeRoute)}
       <Stack.Navigator initialRouteName={homeRoute}>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="VendorScreen" component={VendorScreen} />
