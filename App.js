@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 /*import { StyleSheet, Text, View } from 'react-native';*/
@@ -8,14 +9,30 @@ import {CartScreen} from './screens/cart';
 import {LoginScreen} from './screens/logins';
 import {ItemScreen} from './screens/item';
 import { NewLoginScreen } from './screens/login';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 const Stack = createNativeStackNavigator();
 
 const MyStack = () => {
+    const auth = getAuth();
+    const[homeRoute, setHomeRoute] = useState('');
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const uid = user.uid;
+    setHomeRoute("HomeScreen")
+    // ...
+  } else {
+    // User is signed out
+    // ...
+    setHomeRoute("NewLoginScreen")
+  }
+});
+
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="NewLoginScreen">
+      <Stack.Navigator initialRouteName={homeRoute}>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="VendorScreen" component={VendorScreen} />
         <Stack.Screen name="CartScreen" component={CartScreen} />
