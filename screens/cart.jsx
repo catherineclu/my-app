@@ -3,7 +3,7 @@ import { db } from '../firebaseConfig';
 import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView, Text, View, Image, Button, Pressable} from "react-native";
 import { useEffect } from 'react';
-import { doc, addDoc, getDocs, collection } from 'firebase/firestore'; // or get doc
+import { doc, addDoc, getDocs, collection } from 'firebase/firestore'; 
 import { isReactNative } from '@firebase/util';
 import { auth } from '../firebaseConfig.js';
 

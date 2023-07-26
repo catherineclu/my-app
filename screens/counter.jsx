@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
 const Counter = () => {
-  const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(0);
 
     const increment = () => {
         setQuantity(quantity + 1);

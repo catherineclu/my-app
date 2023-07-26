@@ -1,13 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { TouchableOpacity, ScrollView, View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import styles from '../style.js';
 import Counter from "./counter.jsx"
-
+import { doc, addDoc, getDocs, collection } from 'firebase/firestore'; 
+import { auth } from '../firebaseConfig.js';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { NativeBaseProvider, HStack, NumericInput } from 'native-base';
+import { db } from '../firebaseConfig';
 
 export const ItemScreen = ({navigation}) => {
+    const usersDocRef = doc(db, "users", auth.currentUser.uid)
+    const cartCollectionRef = collection(usersDocRef, "cart")
+    const [quantity, setQuantity] = useState(0);
+
+    const createItem = async () => {
+        await addDoc(cartCollectionRef, {name: "Cucumber Kimchi", quantity: quantity}); //figure out how to update item quantity
+        console.log("success, added to cart")
+        navigation.replace("VendorScreen");
+    };
+    
+    const increment = () => {
+        setQuantity(quantity + 1);
+    };
+  
+    const decrement = () => {
+        if (quantity > 0) {
+        setQuantity(quantity - 1);
+        }
+    };
+
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
@@ -26,13 +47,19 @@ export const ItemScreen = ({navigation}) => {
                         ></Image>
                 <Text style={styles.heading}>Cucumber Kimchi</Text>
                 <Text style={styles.bodytext}>Item description: Cucumber kimchi is a refreshing Korean side dish</Text>
-                <Counter />
+                <View style={counterStyles.countercontainer}>
+                <Button title="-" style={counterStyles.button} onPress={decrement} />
+                <View>
+                <Text>{quantity}</Text>
+                </View>
+                <Button title="+" style={counterStyles.button} onPress={increment} />
+                </View>
             </View>
             
             </ScrollView>
             <View style={ItemStyles.buttonContainer}>
                 <TouchableOpacity
-                        onPress={() => navigation.navigate('CartScreen')}
+                        onPress={createItem}
                         style={ItemStyles.button}>
                         <Text style={ItemStyles.buttonText}>Add to Cart</Text>
                     </TouchableOpacity>
@@ -92,4 +119,21 @@ const ItemStyles = StyleSheet.create({
 
     // }
   })
+
+  const counterStyles = StyleSheet.create({
+    countercontainer:{
+        flexDirection: "row",
+        backgroundColor: "#FFF9A6",
+        width: "40%",
+        padding: 15,
+        borderRadius: 10,
+        alignItems: "center",
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+        marginBottom: 10,
+    },
+    button:{
+        flexDirection: 'row',
+    }
+})
 
