@@ -10,11 +10,19 @@ import {LoginScreen} from './screens/logins';
 import {ItemScreen} from './screens/item';
 import { NewLoginScreen } from './screens/login';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {useFonts} from "expo-font";
 
 
 const Stack = createNativeStackNavigator();
 
 const MyStack = () => {
+    // const [fontsLoaded] = useFonts({
+    //     'Fredoka': require('./assets/fonts/fredoka-one.one-regular.ttf'),
+    //   });
+    
+    //   if (!fontsLoaded) {
+    //     return null;
+    //   }
     const auth = getAuth();
     const user = auth.currentUser;
     const [homeRoute, setHomeRoute] = useState('');

@@ -10,9 +10,9 @@ import { useNavigation } from '@react-navigation/native';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 import { db } from '../firebaseConfig';
 import { doc, setDoc, addDoc, collection } from 'firebase/firestore';
+import { useFonts } from 'expo-font';
 
 export const NewLoginScreen = ({navigation}) => {
-
     const[isSignedIn, setIsSignedIn] = useState('');
     // text input states
     const[email, setEmail] = useState('');
@@ -58,12 +58,19 @@ export const NewLoginScreen = ({navigation}) => {
             console.log(err);
         })
     }
+    const [fontsLoaded] = useFonts({
+        'Fredoka': require('../assets/fonts/fredoka-one.one-regular.ttf'),
+      });
     
+      if (!fontsLoaded) {
+        return null;
+      }
+
 
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
-                <Text onPress={() => navigation.navigate('HomeScreen')} style={{fontSize: 30, fontWeight: "bold", textAlign: "center", marginLeft: 110}}>[App Name]</Text>
+                <Text onPress={() => navigation.navigate('HomeScreen')} style={{fontSize: 30, fontFamily: 'Fredoka', fontWeight: "bold", textAlign: "center", marginLeft: 110}}>[App Name]</Text>
                 {/* <Pressable onPress={() => navigation.navigate('CartScreen')}>
                     <Image style={{width: 40, height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
                 </Pressable> */}
