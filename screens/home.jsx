@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable, TouchableOpacity } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { auth } from '../firebaseConfig';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc, getDocs, collection, addDoc} from "firebase/firestore";
+import {db} from '../firebaseConfig';
 
 export const HomeScreen = ({navigation}) => {
 
@@ -18,7 +20,8 @@ export const HomeScreen = ({navigation}) => {
     //         })
     //         .catch(error => alert(error.message))
     // }
-    
+    const [vendors, setVendors] = useState([]);
+    const vendorCollectionRef = collection(db, "vendor");
 
     const SignOutUser = ()=>{
         signOut(auth)
@@ -31,6 +34,16 @@ export const HomeScreen = ({navigation}) => {
         })
     }
 
+    useEffect(() => {
+        const getVendors = async () => {
+            const vendorData = await getDocs(vendorCollectionRef);
+            setVendors(vendorData.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+            console.log(vendors)
+        }
+        getVendors();
+
+    }, []);
+
 
     return (
         <SafeAreaView style={styles.layout}>
@@ -41,24 +54,28 @@ export const HomeScreen = ({navigation}) => {
                 </Pressable>
                 
             </View>
+
+            {vendors.map((vendor) => {
+                        return(
             <Pressable style={styles.vendor} onPress={() => navigation.navigate('VendorScreen')}>
                 <Image style={{width: "100%", height: "70%"}} source={require("../assets/dumplings.jpeg")}/>
                 <View style={{height: "30%", backgroundColor: "white", flexDirection: "row", marginTop: 5}}>
                     <View style={{marginLeft: 5, flex: 1}}>
-                        <Text style={{fontSize: 15, fontWeight: "bold"}}>[Vendor Name]</Text>
-                        <Text>[Cuisine Type]</Text>
+                        <Text style={{fontSize: 15, fontWeight: "bold"}}>{vendor.name}</Text>
+                        <Text>{vendor.cuisine}</Text>
                     </View>
                     <View style={{alignItems: "flex-end", marginRight: 5, flex: 1}}>
-                        <Text>[Location]</Text>
+                        <Text>{vendor.location}</Text>
                         <Text>[Pickup Time]</Text>
                     </View>
                 </View>
             </Pressable>
+                        );
+                    })}
+
             {/* <Pressable onPress={() => navigation.navigate('NewLoginScreen')}>
                 <Text style={styles.vendor}>Link to Login Page</Text>
-            </Pressable> */}
-
-
+                </Pressable> */}
 
             <View> 
                 <Button styles={styles.button} onPress={SignOutUser} title="Sign out">

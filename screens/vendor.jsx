@@ -10,12 +10,13 @@ const screenWidth = Dimensions.get('window').width;
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import styles from '../style.js'
 
-export const VendorScreen = ({navigation}) => {
+const VendorScreen = ({navigation}) => {
 
     const [vendorInfo, setVendorInfo] = useState("");
     const [menu, setMenu] = useState([]);
     const vendorDocRef = doc(db, "vendor", "5Ln5vKIXNa7ZNshoMDTQ");
     const menuCollectionRef = collection(vendorDocRef, "Menu");
+    const [itemId, setItemId] = useState("");
 
     useEffect(() => {
         const getVendor = async () => {
@@ -38,7 +39,14 @@ export const VendorScreen = ({navigation}) => {
             console.log(menu)
         }
         getMenu();
+
     }, []);
+
+    async function itemClick() {
+        // setItemId("hello"); 
+        // console.log(itemId)
+        navigation.navigate('ItemScreen')
+    };
       
     return (
 
@@ -87,7 +95,7 @@ export const VendorScreen = ({navigation}) => {
                     {menu.map((item) => {
                         return(
                         <View>
-                        <Pressable style={itemstyles.pressable} onPress={() => navigation.navigate('ItemScreen')}>
+                        <Pressable style={itemstyles.pressable} onPress={itemClick}>
                         
                         <Image source={require("../assets/images/banchan.jpg")} 
                                alt="banchan1"
@@ -146,3 +154,5 @@ const itemstyles = StyleSheet.create({
     },
     
 });
+
+export {VendorScreen}
