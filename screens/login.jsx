@@ -58,13 +58,6 @@ export const NewLoginScreen = ({navigation}) => {
             console.log(err);
         })
     }
-    const [fontsLoaded] = useFonts({
-        'Fredoka': require('../assets/fonts/fredoka-one.one-regular.ttf'),
-      });
-    
-      if (!fontsLoaded) {
-        return null;
-      }
 
 
     return (

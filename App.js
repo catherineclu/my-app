@@ -16,13 +16,7 @@ import {useFonts} from "expo-font";
 const Stack = createNativeStackNavigator();
 
 const MyStack = () => {
-    // const [fontsLoaded] = useFonts({
-    //     'Fredoka': require('./assets/fonts/fredoka-one.one-regular.ttf'),
-    //   });
     
-    //   if (!fontsLoaded) {
-    //     return null;
-    //   }
     const auth = getAuth();
     const user = auth.currentUser;
     const [homeRoute, setHomeRoute] = useState('');
@@ -57,6 +51,13 @@ const MyStack = () => {
     // }
     // });
 
+    const [fontsLoaded] = useFonts({
+        'Fredoka': require('./assets/fonts/fredoka-one.one-regular.ttf'),
+      });
+    
+      if (!fontsLoaded) {
+        return null;
+      }
 
   return (
     <NavigationContainer>
