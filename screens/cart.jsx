@@ -73,7 +73,16 @@ export const CartScreen = ({navigation}) => {
                     <Button title="Delete" onPress={() => {deleteItem(item.id)}}></Button>
                 </View>;
         })}
-        
+
+        <View>
+            <Text>Order Summary</Text>
+            <Text>Subtotal: </Text>
+            <Text>Delivery Fee: </Text>
+            <Text>Tax: </Text>
+            <Text>Tip: </Text>
+            <Text>Total: </Text>
+            <Button title="Checkout" onPress={() => navigation.navigate('CheckoutScreen')}></Button>
+        </View>
 
         </SafeAreaView>
     );

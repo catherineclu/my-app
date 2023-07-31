@@ -2,18 +2,30 @@ import * as React from 'react';
 import { useEffect, useState, useMemo } from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 /*import { StyleSheet, Text, View } from 'react-native';*/
 import { HomeScreen } from './screens/home';
 import {VendorScreen} from './screens/vendor';
 import {CartScreen} from './screens/cart';
 import {LoginScreen} from './screens/logins';
 import {ItemScreen} from './screens/item';
+import { CheckoutScreen } from './screens/checkout';
 import { NewLoginScreen } from './screens/login';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {useFonts} from "expo-font";
 
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const MyTab = () => {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }}/>
+            <Tab.Screen name="CartScreen" component={CartScreen} options={{ headerShown: false }}/>
+        </Tab.Navigator>
+    );
+}
 
 const MyStack = () => {
     
@@ -63,12 +75,12 @@ const MyStack = () => {
     <NavigationContainer>
         {console.log(homeRoute)}
       <Stack.Navigator initialRouteName={homeRoute}>
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="VendorScreen" component={VendorScreen} />
-        <Stack.Screen name="CartScreen" component={CartScreen} />
+        <Stack.Screen name="HomeScreen" component={MyTab} options={{ headerShown: false }}/>
+        <Stack.Screen name="VendorScreen" component={VendorScreen}/>
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="ItemScreen" component={ItemScreen} />
-        <Stack.Screen name="NewLoginScreen" component={NewLoginScreen} />
+        <Stack.Screen name="ItemScreen" component={ItemScreen}/>
+        <Stack.Screen name="NewLoginScreen" component={NewLoginScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="CheckoutScreen" component={CheckoutScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
