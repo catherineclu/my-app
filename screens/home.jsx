@@ -5,6 +5,7 @@ import { auth } from '../firebaseConfig';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, getDocs, collection, addDoc} from "firebase/firestore";
 import {db} from '../firebaseConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const HomeScreen = ({navigation}) => {
 
@@ -34,11 +35,21 @@ export const HomeScreen = ({navigation}) => {
         })
     }
 
+    const storeData = async (value) => {
+        try {
+          await AsyncStorage.setItem('my-key', value);
+          console.log("success home screen", value)
+          navigation.navigate('VendorScreen')
+
+        } catch (e) {
+          // saving error
+        }
+      };
+
     useEffect(() => {
         const getVendors = async () => {
             const vendorData = await getDocs(vendorCollectionRef);
             setVendors(vendorData.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
-            console.log(vendors)
         }
         getVendors();
 
@@ -57,11 +68,12 @@ export const HomeScreen = ({navigation}) => {
 
             {vendors.map((vendor) => {
                         return(
-            <Pressable style={styles.vendor} onPress={() => navigation.navigate('VendorScreen')}>
+            <Pressable style={styles.vendor} key={vendor.id} onPress={() => storeData(vendor.id)}>
                 <Image style={{width: "100%", height: "70%"}} source={require("../assets/dumplings.jpeg")}/>
                 <View style={{height: "30%", backgroundColor: "white", flexDirection: "row", marginTop: 5}}>
                     <View style={{marginLeft: 5, flex: 1}}>
                         <Text style={{fontSize: 15, fontWeight: "bold"}}>{vendor.name}</Text>
+                        <Text>{vendor.id}</Text>
                         <Text>{vendor.cuisine}</Text>
                     </View>
                     <View style={{alignItems: "flex-end", marginRight: 5, flex: 1}}>

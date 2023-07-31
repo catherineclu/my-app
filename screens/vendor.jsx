@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider, Flex} from "native-base";
 import { doc, getDoc, getDocs, collection, addDoc} from "firebase/firestore";
 import {db} from '../firebaseConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -14,11 +15,30 @@ const VendorScreen = ({navigation}) => {
 
     const [vendorInfo, setVendorInfo] = useState("");
     const [menu, setMenu] = useState([]);
-    const vendorDocRef = doc(db, "vendor", "5Ln5vKIXNa7ZNshoMDTQ");
-    const menuCollectionRef = collection(vendorDocRef, "Menu");
     const [itemId, setItemId] = useState("");
+    const [vendorId, setVendorId] = useState("");
+    // const [vendorDocRef, setVendorDocRef] = useState();
+    // const [menuCollectionRef, setMenuCollectionRef] = useState();
+
+    const getData = async () => {
+        try {
+          const value = await AsyncStorage.getItem('my-key');
+          if (value !== null) {
+            console.log("success vendor screen", value)
+            return value
+            //return value
+          }
+        } catch (e) {
+            console.log(e)
+          // error reading value
+        }
+      };
 
     useEffect(() => {
+
+        const vendorDocRef = doc(db, "vendor", "5Ln5vKIXNa7ZNshoMDTQ");
+        const menuCollectionRef = collection(vendorDocRef, "Menu");
+        
         const getVendor = async () => {
             const docSnap = await getDoc(vendorDocRef);
 
@@ -33,10 +53,10 @@ const VendorScreen = ({navigation}) => {
             }
         };
         getVendor();
+
         const getMenu = async () => {
             const menuData = await getDocs(menuCollectionRef);
             setMenu(menuData.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
-            console.log(menu)
         }
         getMenu();
 
@@ -94,7 +114,7 @@ const VendorScreen = ({navigation}) => {
 
                     {menu.map((item) => {
                         return(
-                        <View>
+                        <View key={item.id}>
                         <Pressable style={itemstyles.pressable} onPress={itemClick}>
                         
                         <Image source={require("../assets/images/banchan.jpg")} 
