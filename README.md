@@ -18,7 +18,7 @@ appreciation for traditional, homecooked Asian cuisine.
 * Expo
 * Firebase
 
-### How to use
+### How to Install
 
 1. Clone the repository
 ```sh
