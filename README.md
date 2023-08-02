@@ -22,7 +22,7 @@ appreciation for traditional, homecooked Asian cuisine.
 
 1. Clone the repository
 ```sh
-   git clone 
+   git clone git@github.com:catherineclu/my-app.git
 ```
 2. Navigate into the my-app directory
 ```sh
