@@ -32,6 +32,6 @@ appreciation for traditional, homecooked Asian cuisine.
 ```sh
    npx expo start
 ```
-4. Follow the terminal directions to either open the app in the Expo mobile app or in XCode/Android Studio.
+4. Follow the directions in the terminal to either open the app in the Expo mobile app or in XCode/Android Studio.
 
 Note: errors in compiling may be due to the app being currently in development.
