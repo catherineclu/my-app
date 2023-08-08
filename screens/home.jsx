@@ -59,10 +59,7 @@ export const HomeScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
-                <Text style={{fontSize: 30, fontWeight: "bold", textAlign: "center", marginLeft: 110}}>[App Name]</Text>
-                <Pressable onPress={() => navigation.navigate('CartScreen')}>
-                    <Image style={{width: 40, height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
-                </Pressable>
+                <Text style={{fontSize: 30, fontWeight: "bold", fontFamily: 'Fredoka'}}>JipBap</Text>
                 
             </View>
 
@@ -104,6 +101,7 @@ const styles = StyleSheet.create({
         height: 75,
         backgroundColor: "#FFF9A6",
         alignItems: 'center',
+        justifyContent: 'center',
         flexDirection: "row",
     },
     layout: {
