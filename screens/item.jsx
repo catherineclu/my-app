@@ -66,7 +66,8 @@ export const ItemScreen = ({navigation}) => {
     }, [])
 
     const createItem = async (itemName) => {
-        await addDoc(cartCollectionRef, {name: itemName, quantity: quantity}, ID); //figure out how to update item quantity
+        //add item id as name
+        await addDoc(cartCollectionRef, {name: itemName, quantity: quantity}); //figure out how to update item quantity
         console.log("success, added to cart")
         navigation.replace("VendorScreen");
     };
