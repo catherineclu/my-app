@@ -1,20 +1,72 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { TouchableOpacity, ScrollView, View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import styles from '../style.js';
 import Counter from "./counter.jsx"
-import { doc, addDoc, getDocs, collection } from 'firebase/firestore'; 
+import { doc, addDoc, getDoc, collection } from 'firebase/firestore'; 
 import { auth } from '../firebaseConfig.js';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { db } from '../firebaseConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const ItemScreen = ({navigation}) => {
     const usersDocRef = doc(db, "users", auth.currentUser.uid)
     const cartCollectionRef = collection(usersDocRef, "cart")
     const [quantity, setQuantity] = useState(0);
+    const [itemInfo, setItemInfo] = useState("");
 
-    const createItem = async () => {
-        await addDoc(cartCollectionRef, {name: "Cucumber Kimchi", quantity: quantity}); //figure out how to update item quantity
+    const getItemId = async () => {
+        try {
+          const value = await AsyncStorage.getItem('item-id');
+          if (value !== null) {
+            console.log("success getting item screen", value)
+            return value
+            //return value
+          }
+        } catch (e) {
+            console.log(e)
+          // error reading value
+        }
+      };
+    
+      const getVendor = async () => {
+        try {
+          const value = await AsyncStorage.getItem('vendor-id');
+          if (value !== null) {
+            console.log("success getting vendor value item screen", value)
+            return value
+            //return value
+          }
+        } catch (e) {
+            console.log(e)
+          // error reading value
+        }
+      };
+
+    useEffect(() => {
+        const getItem = async () => {
+            const itemId = await getItemId();
+            const vendorId = await getVendor();
+
+            const vendorDocRef = await doc(db, "vendor", vendorId);
+            const itemDocRef = await doc(vendorDocRef, "Menu", itemId);
+            const itemDocSnap = await getDoc(itemDocRef);
+
+            if (itemDocSnap.exists()) {
+                console.log("Item document data:", itemDocSnap.data());
+                setItemInfo(itemDocSnap.data());
+                
+            } else {
+                // docSnap.data() will be undefined in this case
+                console.log("No such document!");
+                setVendorInfo()
+            }
+        }
+        getItem();
+    }, [])
+
+    const createItem = async (itemName) => {
+        await addDoc(cartCollectionRef, {name: itemName, quantity: quantity}, ID); //figure out how to update item quantity
         console.log("success, added to cart")
         navigation.replace("VendorScreen");
     };
@@ -45,8 +97,8 @@ export const ItemScreen = ({navigation}) => {
                         h={300} 
                         resizeMode="contain"
                         ></Image>
-                <Text style={styles.heading}>Cucumber Kimchi</Text>
-                <Text style={styles.bodytext}>Item description: Cucumber kimchi is a refreshing Korean side dish</Text>
+                <Text style={styles.heading}>{itemInfo.name}</Text>
+                <Text style={styles.bodytext}>Item description: {itemInfo.description}</Text>
                 <View style={counterStyles.countercontainer}>
                 <Button title="-" style={counterStyles.button} onPress={decrement} />
                 <View>
@@ -59,7 +111,7 @@ export const ItemScreen = ({navigation}) => {
             </ScrollView>
             <View style={ItemStyles.buttonContainer}>
                 <TouchableOpacity
-                        onPress={createItem}
+                        onPress={() => createItem(itemInfo.name)}
                         style={ItemStyles.button}>
                         <Text style={ItemStyles.buttonText}>Add to Cart</Text>
                     </TouchableOpacity>
