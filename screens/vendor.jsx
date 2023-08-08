@@ -22,7 +22,7 @@ const VendorScreen = ({navigation}) => {
 
     const getData = async () => {
         try {
-          const value = await AsyncStorage.getItem('my-key');
+          const value = await AsyncStorage.getItem('vendor-id');
           if (value !== null) {
             console.log("success vendor screen", value)
             return value
@@ -64,11 +64,16 @@ const VendorScreen = ({navigation}) => {
 
     }, []);
 
-    async function itemClick() {
-        // setItemId("hello"); 
-        // console.log(itemId)
-        navigation.navigate('ItemScreen')
-    };
+    const storeData = async (value) => {
+        try {
+          await AsyncStorage.setItem('item-id', value);
+          console.log("success vendor screen storage", value)
+          navigation.navigate('ItemScreen')
+
+        } catch (e) {
+          // saving error
+        }
+      };
       
     return (
 
@@ -117,7 +122,7 @@ const VendorScreen = ({navigation}) => {
                     {menu.map((item) => {
                         return(
                         <View key={item.id}>
-                        <Pressable style={itemstyles.pressable} onPress={itemClick}>
+                        <Pressable style={itemstyles.pressable} onPress={() => storeData(item.id)}>
                         
                         <Image source={require("../assets/images/banchan.jpg")} 
                                alt="banchan1"
