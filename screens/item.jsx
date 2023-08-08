@@ -65,11 +65,15 @@ export const ItemScreen = ({navigation}) => {
         getItem();
     }, [])
 
-    const createItem = async (itemName) => {
+    const createItem = async (itemName, itemPrice) => {
         //add item id as name
-        await addDoc(cartCollectionRef, {name: itemName, quantity: quantity}); //figure out how to update item quantity
+        if (quantity > 0) {
+        await addDoc(cartCollectionRef, {name: itemName, quantity: quantity, price: itemPrice}); //figure out how to update item quantity
         console.log("success, added to cart")
         navigation.replace("VendorScreen");
+        } else {
+            console.log("item quantity must be more than 0 to add to cart")
+        }
     };
     
     const increment = () => {
@@ -100,6 +104,7 @@ export const ItemScreen = ({navigation}) => {
                         ></Image>
                 <Text style={styles.heading}>{itemInfo.name}</Text>
                 <Text style={styles.bodytext}>Item description: {itemInfo.description}</Text>
+                <Text style={styles.bodytext}>Item price: {itemInfo.price}</Text>
                 <View style={counterStyles.countercontainer}>
                 <Button title="-" style={counterStyles.button} onPress={decrement} />
                 <View>
@@ -112,7 +117,7 @@ export const ItemScreen = ({navigation}) => {
             </ScrollView>
             <View style={ItemStyles.buttonContainer}>
                 <TouchableOpacity
-                        onPress={() => createItem(itemInfo.name)}
+                        onPress={() => createItem(itemInfo.name, itemInfo.price)}
                         style={ItemStyles.button}>
                         <Text style={ItemStyles.buttonText}>Add to Cart</Text>
                     </TouchableOpacity>
