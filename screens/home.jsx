@@ -37,7 +37,7 @@ export const HomeScreen = ({navigation}) => {
 
     const storeData = async (value) => {
         try {
-          await AsyncStorage.setItem('my-key', value);
+          await AsyncStorage.setItem('vendor-id', value);
           console.log("success home screen", value)
           navigation.navigate('VendorScreen')
 
