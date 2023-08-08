@@ -17,8 +17,8 @@ const VendorScreen = ({navigation}) => {
     const [menu, setMenu] = useState([]);
     const [itemId, setItemId] = useState("");
     const [vendorId, setVendorId] = useState("");
-    // const [vendorDocRef, setVendorDocRef] = useState();
-    // const [menuCollectionRef, setMenuCollectionRef] = useState();
+    const [vendorDocRef, setVendorDocRef] = useState();
+    const [menuCollectionRef, setMenuCollectionRef] = useState();
 
     const getData = async () => {
         try {
@@ -35,11 +35,17 @@ const VendorScreen = ({navigation}) => {
       };
 
     useEffect(() => {
+        
 
-        const vendorDocRef = doc(db, "vendor", "5Ln5vKIXNa7ZNshoMDTQ");
-        const menuCollectionRef = collection(vendorDocRef, "Menu");
+        // const vendorDocRef = doc(db, "vendor", "5Ln5vKIXNa7ZNshoMDTQ");
+        // const menuCollectionRef = collection(vendorDocRef, "Menu");
         
         const getVendor = async () => {
+            const value = await getData();
+
+            const vendorDocRef = doc(db, "vendor", value);
+            const menuCollectionRef = collection(vendorDocRef, "Menu");
+
             const docSnap = await getDoc(vendorDocRef);
 
             if (docSnap.exists()) {
@@ -51,14 +57,10 @@ const VendorScreen = ({navigation}) => {
                 console.log("No such document!");
                 setVendorInfo()
             }
-        };
-        getVendor();
-
-        const getMenu = async () => {
             const menuData = await getDocs(menuCollectionRef);
             setMenu(menuData.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
-        }
-        getMenu();
+        };
+        getVendor();
 
     }, []);
 
