@@ -27,6 +27,8 @@ export const HomeScreen = ({navigation}) => {
     const SignOutUser = ()=>{
         signOut(auth)
         .then((re) => {
+            AsyncStorage.removeItem('vendor-id')
+            AsyncStorage.removeItem('item-id')
             navigation.replace("NewLoginScreen");
             console.log("signed out")
         })
