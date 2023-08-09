@@ -3,7 +3,7 @@ import { db } from '../firebaseConfig';
 import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView, Text, View, Image, Button, Pressable, StyleSheet, SafeAreaView} from "react-native";
 import { useEffect } from 'react';
-import { doc, addDoc, getDocs, collection, deleteDoc } from 'firebase/firestore'; 
+import { doc, addDoc, getDocs, collection, deleteDoc, setDoc, getDoc } from 'firebase/firestore'; 
 import { isReactNative } from '@firebase/util';
 import { auth } from '../firebaseConfig.js';
 
@@ -24,10 +24,13 @@ export const CartScreen = ({navigation}) => {
 
     const deleteItem = async(id) => {
         const itemDoc = doc(usersDocRef, "cart", id);
-        if (id.quantity > 1) {
-            await addDoc(cartCollectionRef, {name: itemName, quantity: quantity - 1, price: itemPrice})
-        }
-
+        itemDocData = await getDoc(itemDoc)
+        // if (itemDocData.data() > 1) {
+        //     await setDoc(itemDoc, {quantity: quantity - 1})
+        // }
+        // else {
+        //     await deleteDoc(itemDoc)
+        // }
         await deleteDoc(itemDoc)
         navigation.replace('HomeScreen', { screen: 'CartScreen' })
         console.log("deleted")

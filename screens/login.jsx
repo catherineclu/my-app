@@ -63,13 +63,13 @@ export const NewLoginScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
-                <Text onPress={() => navigation.navigate('HomeScreen')} style={{fontSize: 30, fontFamily: 'Fredoka', fontWeight: "bold", textAlign: "center", marginLeft: 110}}>[App Name]</Text>
+                <Text onPress={() => navigation.navigate('HomeScreen')} style={{fontSize: 30, fontFamily: 'Fredoka', fontWeight: "bold"}}>JipBap</Text>
                 {/* <Pressable onPress={() => navigation.navigate('CartScreen')}>
                     <Image style={{width: 40, height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
                 </Pressable> */}
                 
             </View>
-            <Text>Login</Text>
+            {/* <Text>Login</Text> */}
             <KeyboardAvoidingView style={styles.container} behavior="padding">
                 <View style={loginstyles.inputContainer}>
                     <TextInput placeholder="Email" 
@@ -136,7 +136,7 @@ const loginstyles = StyleSheet.create({
         width: "100%",
         padding: 15,
         borderRadius: 10,
-        alignItems: "center"
+        alignItems: "center",
     },
     buttonText:{
         color: "white",

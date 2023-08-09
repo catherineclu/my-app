@@ -13,6 +13,7 @@ import { CheckoutScreen } from './screens/checkout';
 import { NewLoginScreen } from './screens/login';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {useFonts} from "expo-font";
+import { initStripe } from '@stripe/stripe-react-native';
 
 
 const Stack = createNativeStackNavigator();
@@ -28,6 +29,8 @@ const MyTab = () => {
 }
 
 const MyStack = () => {
+    
+
     
     const auth = getAuth();
     const user = auth.currentUser;
@@ -50,6 +53,13 @@ const MyStack = () => {
         console.log(homeRoute)
     }, [])
 
+    useEffect(() => {
+        initStripe({
+          publishableKey: "pk_test_51NcuFEGCn9Upn7WMRkokFnh1gXtJigvFeeRqUwwmSDWmXGDq4tzsbdveQb5jOnauAFi4F7hwoHvSDjQhyPOxhUdw00d3EqDDL6",
+          merchantIdentifier: 'merchant.identifier',
+          urlScheme: "your-url-scheme",
+        });
+      }, []);
     
     // onAuthStateChanged(auth, (user) => {
     // if (user) {
@@ -74,15 +84,16 @@ const MyStack = () => {
   return (
     <NavigationContainer>
         {console.log(homeRoute)}
-      <Stack.Navigator initialRouteName={homeRoute}>
+    <Stack.Navigator initialRouteName={homeRoute}>
         <Stack.Screen name="HomeScreen" component={MyTab} options={{ headerShown: false }}/>
         <Stack.Screen name="VendorScreen" component={VendorScreen}/>
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="ItemScreen" component={ItemScreen}/>
         <Stack.Screen name="NewLoginScreen" component={NewLoginScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="CheckoutScreen" component={CheckoutScreen}/>
-      </Stack.Navigator>
+    </Stack.Navigator>
     </NavigationContainer>
+
   );
 }
 
