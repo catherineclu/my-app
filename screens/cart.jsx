@@ -24,8 +24,12 @@ export const CartScreen = ({navigation}) => {
 
     const deleteItem = async(id) => {
         const itemDoc = doc(usersDocRef, "cart", id);
+        if (id.quantity > 1) {
+            await addDoc(cartCollectionRef, {name: itemName, quantity: quantity - 1, price: itemPrice})
+        }
+
         await deleteDoc(itemDoc)
-        navigation.replace("CartScreen")
+        navigation.replace('HomeScreen', { screen: 'CartScreen' })
         console.log("deleted")
     }
 
@@ -70,6 +74,7 @@ export const CartScreen = ({navigation}) => {
                 return <View> 
                     <Text>Item: {item.name}</Text>
                     <Text>Quantity: {item.quantity}</Text>
+                    <Text>Price: {item.quantity}</Text>
                     <Button title="Delete" onPress={() => {deleteItem(item.id)}}></Button>
                 </View>;
         })}
@@ -77,7 +82,6 @@ export const CartScreen = ({navigation}) => {
         <View>
             <Text>Order Summary</Text>
             <Text>Subtotal: </Text>
-            <Text>Delivery Fee: </Text>
             <Text>Tax: </Text>
             <Text>Tip: </Text>
             <Text>Total: </Text>
