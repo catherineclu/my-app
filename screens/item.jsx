@@ -3,7 +3,7 @@ import { TouchableOpacity, ScrollView, View, Text, Button, Image, SafeAreaView, 
 import { NavigationContainer } from '@react-navigation/native';
 import styles from '../style.js';
 import Counter from "./counter.jsx"
-import { doc, addDoc, getDoc, collection } from 'firebase/firestore'; 
+import { doc, addDoc, getDoc, collection, setDoc } from 'firebase/firestore'; 
 import { auth } from '../firebaseConfig.js';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { db } from '../firebaseConfig';
@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const ItemScreen = ({navigation}) => {
     const usersDocRef = doc(db, "users", auth.currentUser.uid)
-    const cartCollectionRef = collection(usersDocRef, "cart")
+    //const cartCollectionRef = collection(usersDocRef, "cart")
     const [quantity, setQuantity] = useState(0);
     const [itemInfo, setItemInfo] = useState("");
 
@@ -51,6 +51,7 @@ export const ItemScreen = ({navigation}) => {
             const vendorDocRef = await doc(db, "vendor", vendorId);
             const itemDocRef = await doc(vendorDocRef, "Menu", itemId);
             const itemDocSnap = await getDoc(itemDocRef);
+            const cartItemDocSnap = await getDoc(doc(usersDocRef, "cart", itemId))
 
             if (itemDocSnap.exists()) {
                 console.log("Item document data:", itemDocSnap.data());
@@ -61,14 +62,21 @@ export const ItemScreen = ({navigation}) => {
                 console.log("No such document!");
                 setVendorInfo()
             }
+
+            if (cartItemDocSnap.exists()) {
+                console.log("item already added to cart", cartItemDocSnap.data())
+                setQuantity(cartItemDocSnap.data().quantity);
+            }
         }
         getItem();
     }, [])
 
     const createItem = async (itemName, itemPrice) => {
+        const itemId = await getItemId();
+        console.log("item id:", itemId);
         //add item id as name
         if (quantity > 0) {
-        await addDoc(cartCollectionRef, {name: itemName, quantity: quantity, price: itemPrice}); //figure out how to update item quantity
+        await setDoc(doc(usersDocRef, "cart", itemId), {name: itemName, quantity: quantity, price: itemPrice}); //figure out how to update item quantity
         console.log("success, added to cart")
         //navigation.replace("VendorScreen");
         navigation.goBack()
