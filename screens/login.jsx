@@ -63,7 +63,7 @@ export const NewLoginScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
-                <Text onPress={() => navigation.navigate('HomeScreen')} style={{fontSize: 30, fontFamily: 'Fredoka', fontWeight: "bold"}}>JipBap</Text>
+                <Text onPress={() => navigation.navigate('HomeScreen')} style={styles.headerText}>JipBap</Text>
                 {/* <Pressable onPress={() => navigation.navigate('CartScreen')}>
                     <Image style={{width: 40, height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
                 </Pressable> */}
@@ -132,24 +132,25 @@ const loginstyles = StyleSheet.create({
         marginTop: 40,
     },
     button: {
-        backgroundColor: "blue",
+        backgroundColor: "#1D7151",
         width: "100%",
         padding: 15,
         borderRadius: 10,
         alignItems: "center",
     },
     buttonText:{
-        color: "white",
+        color: "#fffdf0",
         fontWeight: "700",
         fontSize: 16
     },
     buttonOutline: {
-        backgroundColor: "white",
+        backgroundColor: "#fffdf0",
         marginTop: 5,
-        borderColor: "blue",
+        borderColor: "#1D7151",
+        borderWidth: 1, //add?
     },
     buttonOutlineText: {
-        color: "blue",
+        color: "#1D7151",
         fontWeight: "700",
         fontSize: 16
     },

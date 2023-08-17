@@ -6,6 +6,7 @@ import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, getDocs, collection, addDoc} from "firebase/firestore";
 import {db} from '../firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from '../style.js';
 
 export const HomeScreen = ({navigation}) => {
 
@@ -61,15 +62,15 @@ export const HomeScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
-                <Text style={{fontSize: 30, fontWeight: "bold", fontFamily: 'Fredoka'}}>JipBap</Text>
+                <Text style={styles.headerText}>JipBap</Text>
                 
             </View>
 
             {vendors.map((vendor) => {
                         return(
-            <Pressable style={styles.vendor} key={vendor.id} onPress={() => storeData(vendor.id)}>
-                <Image style={{width: "100%", height: "70%"}} source={require("../assets/dumplings.jpeg")}/>
-                <View style={{height: "30%", backgroundColor: "white", flexDirection: "row", marginTop: 5}}>
+            <Pressable style={homeStyles.vendor} key={vendor.id} onPress={() => storeData(vendor.id)}>
+                <Image style={homeStyles.vendorImage} source={require("../assets/dumplings.jpeg")}/>
+                <View style={homeStyles.vendorTextContainer}>
                     <View style={{marginLeft: 5, flex: 1}}>
                         <Text style={{fontSize: 15, fontWeight: "bold"}}>{vendor.name}</Text>
                         <Text>{vendor.id}</Text>
@@ -97,7 +98,7 @@ export const HomeScreen = ({navigation}) => {
     );
 }
 
-const styles = StyleSheet.create({
+const homeStyles = StyleSheet.create({
     header: {
         width: "100%",
         height: 75,
@@ -114,13 +115,24 @@ const styles = StyleSheet.create({
     vendor: {
         width: 350,
         height: 250,
-        backgroundColor: 'white',
+        backgroundColor: '#CBF6D0',
         margin: 16,
         borderRadius: 2,
         shadowColor: 'black',
         shadowOpacity: 0.3,
         shadowRadius: 1,
         shadowOffset: { height: 1, width: 0.3 }
+    },
+    vendorImage:{
+        width: "100%", 
+        height: "70%"
+    },
+    vendorTextContainer: {
+        height: "30%", 
+        backgroundColor: "#CBF6D0", 
+        flexDirection: "row", 
+        marginTop: 5,
+        borderRadius: 15 //fix later
     },
     button: {
         backgroundColor: "blue",
