@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Dimensions, ScrollView, Pressable, StyleSheet, SafeAreaView, View, Text, Image } from 'react-native';
+import { Dimensions, ScrollView, Pressable, StyleSheet, SafeAreaView, View, Text, Image, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider, Flex} from "native-base";
 import { doc, getDoc, getDocs, collection, addDoc} from "firebase/firestore";
@@ -93,45 +93,60 @@ const VendorScreen = ({navigation}) => {
             <ScrollView width="100%" showsVerticalScrollIndicator={false}>
                 
                 <View style={styles.container}>
-                <Image source={require("../assets/images/cucumber.jpg")} 
-                        alt="cucumber image" 
-                        w="100%" 
-                        h="100%" 
-                        resizeMode="contain"
-                />
+                    <Image source={require("../assets/images/cucumber.jpg")} 
+                            alt="cucumber image" 
+                            w="100%" 
+                            h="100%" 
+                            resizeMode="contain"
+                    />
 
-                <View style={{ width:"100%", flexDirection:'row'}}>
-                     <View style={styles.container}>
-                     <Text style={styles.subheading}>{vendorInfo.name}</Text>
+                    <View style={{ width:"100%", flexDirection:'row'}}>
+                        <View style={styles.container}>
+                            <Text style={styles.subheading}>{vendorInfo.name}</Text>
+                        </View>
+
+                        <View style={styles.container}>
+                            <Text style={[styles.bodytext, {textAlign: 'right'}]}>{vendorInfo.location}</Text>
+                        </View>
                     </View>
-
-                    <View style={styles.container}>
-                     <Text style={[styles.bodytext, {textAlign: 'right'}]}>{vendorInfo.location}</Text>
-                     </View>
+                    <View style={[styles.container, {paddingBottom: 10}]}>
+                        <Text style={styles.subheadingTwo}>Information:</Text>
+                        <Text style={styles.bodytext}>{vendorInfo.description}</Text>
+                    </View>
                 </View>
-                <View style={[styles.container, {paddingBottom: 10}]}>
-                     <Text style={styles.subheadingTwo}>Information:</Text>
-                     <Text style={styles.bodytext}>{vendorInfo.description}</Text>
-                 </View>
-                 </View>
 
                  {/* contact info, to come*/}
                  {/* MENU */}
                 <Text style={[styles.headerTwoText, {textAlign: 'center'}]} >Menu</Text>
-                    <View >
+                <View >
 
                     {menu.map((item) => {
                         return(
                         <View key={item.id}>
-                        <Pressable style={styles.pressable} onPress={() => storeData(item.id)}>
-                        
-                        <Image source={require("../assets/images/banchan.jpg")} 
-                               alt="banchan1"
-                               w="full"
-                               h={24}
-                               resizeMode="contain"/>
-                        <Text styles={styles.headerTwoText}>{item.name}</Text>
-                        </Pressable>
+                            <Pressable style={styles.vendor} key={item.id} onPress={() => storeData(item.id)}>
+                                <Image style={styles.vendorImage} source={require("../assets/images/banchan.jpg")} 
+                                    alt="banchan1"
+                                    />
+                                <View style={styles.vendorTextContainer}>
+                                    <View style={{marginLeft: 10, flex: 1}}>
+                                        <Text style={styles.vendorName}>{item.name}</Text>
+                                    </View>
+                                    <View style={{alignItems: "flex-end", marginRight: 10, flex: 1}}>
+                                        <Text styles={styles.bodytext}>{item.price}</Text>
+                                        {/* <Text>[Pickup Time]</Text> */}
+                                    </View>
+                                </View>
+                
+                            </Pressable>
+
+                            {/* <TouchableOpacity style={styles.pressable} onPress={() => storeData(item.id)}>
+                                <Image source={require("../assets/images/banchan.jpg")} 
+                                    alt="banchan1"
+                                    w="full"
+                                    h={24}
+                                    resizeMode="contain"/>
+                                <Text styles={styles.headerTwoText}>{item.name}</Text>
+                            </TouchableOpacity> */}
                         </View>
                         );
                    

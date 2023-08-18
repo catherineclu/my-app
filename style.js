@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fffdf0",
         marginTop: 5,
         borderColor: "#1D7151",
-        borderWidth: 1, //add?
+        borderWidth: 1, 
     },
     buttonOutlineText: {
         color: "#1D7151",
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     //VENDOR CARDS 
     vendor: {
         width: 350,
-        height: "35%",
+        height: 200,
         backgroundColor: '#fffdf0',
         margin: 16,
         borderRadius: 15,
@@ -162,6 +162,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 15,
         borderTopLeftRadius: 15,
     },
+
     vendorTextContainer: {
         height: "20%", 
         backgroundColor: "#fffdf0", 
@@ -178,8 +179,9 @@ const styles = StyleSheet.create({
     //Pressables for a simpler card (like items)
     pressable: {
         width: '80%', 
-        backgroundColor: "white",
-        rounded: "md",
+        backgroundColor: "#fffdf0",
+        borderColor: "#1D7151",
+        borderWidth: 1, 
         shadow: 2,
         // pt: 0.3,
         // my: 3,
