@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { doc, addDoc, getDocs, collection, deleteDoc, setDoc, getDoc } from 'firebase/firestore'; 
 import { isReactNative } from '@firebase/util';
 import { auth } from '../firebaseConfig.js';
+import styles from '../style';
 
 
 export const CartScreen = ({navigation}) => {
@@ -69,7 +70,7 @@ export const CartScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
-                <Text style={{fontSize: 30, fontWeight: "bold", textAlign: "center"}}>Cart</Text>
+                <Text style={[styles.headerText, {fontSize: 30, fontWeight: "bold", textAlign: "center"}]}>Cart</Text>
             </View>
 
 
@@ -95,7 +96,7 @@ export const CartScreen = ({navigation}) => {
     );
 }
 
-const styles = StyleSheet.create({
+const cartstyles = StyleSheet.create({
     header: {
         width: "100%",
         height: 75,

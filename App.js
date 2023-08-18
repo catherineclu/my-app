@@ -3,7 +3,6 @@ import { useEffect, useState, useMemo } from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-/*import { StyleSheet, Text, View } from 'react-native';*/
 import { HomeScreen } from './screens/home';
 import {VendorScreen} from './screens/vendor';
 import {CartScreen} from './screens/cart';
@@ -73,8 +72,11 @@ const MyStack = () => {
     // }
     // });
 
+    
+
     const [fontsLoaded] = useFonts({
         'Fredoka': require('./assets/fonts/fredoka-one.one-regular.ttf'),
+        'Varela': require('./assets/fonts/VarelaRound-Regular.ttf'),
       });
     
       if (!fontsLoaded) {

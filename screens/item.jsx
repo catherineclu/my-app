@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { TouchableOpacity, ScrollView, View, Text, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import styles from '../style.js';
-import Counter from "./counter.jsx"
 import { doc, addDoc, getDoc, collection, setDoc } from 'firebase/firestore'; 
 import { auth } from '../firebaseConfig.js';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -98,7 +97,7 @@ export const ItemScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
-                <Text style={{fontSize: 30, fontWeight: "bold", textAlign: "center", marginLeft: 110}}>[App Name]</Text>
+                <Text style={{fontSize: 30, fontWeight: "bold", textAlign: "center", marginLeft: 110}}>JipBap</Text>
                 <Pressable onPress={() => navigation.navigate('CartScreen')}>
                     <Image style={{height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
                 </Pressable>
@@ -111,15 +110,19 @@ export const ItemScreen = ({navigation}) => {
                         h={300} 
                         resizeMode="contain"
                         ></Image>
-                <Text style={styles.heading}>{itemInfo.name}</Text>
+                <Text style={styles.headerTwoText}>{itemInfo.name}</Text>
                 <Text style={styles.bodytext}>Item description: {itemInfo.description}</Text>
                 <Text style={styles.bodytext}>Item price: {itemInfo.price}</Text>
+
                 <View style={counterStyles.countercontainer}>
-                <Button title="-" style={counterStyles.button} onPress={decrement} />
-                <View>
-                <Text>{quantity}</Text>
-                </View>
-                <Button title="+" style={counterStyles.button} onPress={increment} />
+                    {/* NEED TO MAKE TOUCHABLE OPACITY THICKER */}
+                    <TouchableOpacity style={counterStyles.button} onPress={decrement}><Text styles={styles.bodytext}>-</Text></TouchableOpacity>
+                    {/* <Button title="-" style={counterStyles.button} onPress={decrement} /> */}
+                    <View>
+                    <Text>{quantity}</Text>
+                    </View>
+                    {/* <Button title="+" style={counterStyles.button} onPress={increment} /> */}
+                    <TouchableOpacity style={counterStyles.button} onPress={increment}><Text styles={styles.bodytext}>+</Text></TouchableOpacity>
                 </View>
             </View>
             
@@ -127,8 +130,8 @@ export const ItemScreen = ({navigation}) => {
             <View style={ItemStyles.buttonContainer}>
                 <TouchableOpacity
                         onPress={() => createItem(itemInfo.name, itemInfo.price)}
-                        style={ItemStyles.button}>
-                        <Text style={ItemStyles.buttonText}>Add to Cart</Text>
+                        style={styles.button}>
+                        <Text style={styles.buttonText}>Add to Cart</Text>
                     </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -190,7 +193,9 @@ const ItemStyles = StyleSheet.create({
   const counterStyles = StyleSheet.create({
     countercontainer:{
         flexDirection: "row",
-        backgroundColor: "#FFF9A6",
+        backgroundColor: "#fffdf0",
+        borderColor: "#1D7151",
+        borderWidth: 1,
         width: "40%",
         padding: 15,
         borderRadius: 10,

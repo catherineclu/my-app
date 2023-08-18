@@ -5,6 +5,7 @@ import { NativeBaseProvider, Flex} from "native-base";
 import { doc, getDoc, getDocs, collection, addDoc} from "firebase/firestore";
 import {db} from '../firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFonts } from 'expo-font';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -79,7 +80,7 @@ const VendorScreen = ({navigation}) => {
 
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
-                <Text style={{fontSize: 30, fontWeight: "bold", textAlign: "center", marginLeft: 110}}>[App Name]</Text>
+                <Text style={styles.headerText}>JipBap</Text>
                 <Pressable onPress={() => navigation.navigate('CartScreen')}>
                     <Image style={{ height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
                 </Pressable>
@@ -89,47 +90,47 @@ const VendorScreen = ({navigation}) => {
                 <Text>get vendor</Text>
             </Pressable> */}
 
-            <ScrollView width={screenWidth} showsVerticalScrollIndicator={false}>
+            <ScrollView width="100%" showsVerticalScrollIndicator={false}>
+                
                 <View style={styles.container}>
                 <Image source={require("../assets/images/cucumber.jpg")} 
                         alt="cucumber image" 
                         w="100%" 
-                        h={300} 
+                        h="100%" 
                         resizeMode="contain"
-                        style={itemstyles.container}
-                        
                 />
 
-                <View style={{flexDirection:'row'}}>
-                     <View style={itemstyles.container}>
-                     <Text style={styles.heading}>{vendorInfo.name}</Text>
+                <View style={{ width:"100%", flexDirection:'row'}}>
+                     <View style={styles.container}>
+                     <Text style={styles.subheading}>{vendorInfo.name}</Text>
                     </View>
 
-                    <View style={itemstyles.container}>
+                    <View style={styles.container}>
                      <Text style={[styles.bodytext, {textAlign: 'right'}]}>{vendorInfo.location}</Text>
                      </View>
                 </View>
-                <View style={itemstyles.container}>
-                     <Text style={styles.subheading}>Information:</Text>
+                <View style={[styles.container, {paddingBottom: 10}]}>
+                     <Text style={styles.subheadingTwo}>Information:</Text>
                      <Text style={styles.bodytext}>{vendorInfo.description}</Text>
                  </View>
                  </View>
+
                  {/* contact info, to come*/}
                  {/* MENU */}
-                <Text style={[styles.heading, {textAlign: 'center'}]} onPress={() => navigation.navigate('ItemScreen')}>Menu</Text>
-                    <View>
+                <Text style={[styles.headerTwoText, {textAlign: 'center'}]} >Menu</Text>
+                    <View >
 
                     {menu.map((item) => {
                         return(
                         <View key={item.id}>
-                        <Pressable style={itemstyles.pressable} onPress={() => storeData(item.id)}>
+                        <Pressable style={styles.pressable} onPress={() => storeData(item.id)}>
                         
                         <Image source={require("../assets/images/banchan.jpg")} 
                                alt="banchan1"
                                w="full"
                                h={24}
                                resizeMode="contain"/>
-                        <Text>{item.name}</Text>
+                        <Text styles={styles.headerTwoText}>{item.name}</Text>
                         </Pressable>
                         </View>
                         );
@@ -143,43 +144,5 @@ const VendorScreen = ({navigation}) => {
 
     );
 }
-
-const itemstyles = StyleSheet.create({
-    //can replace with native base container
-    container: {
-      flex: 1, 
-      //backgroundColor: '#fff',
-      //alignItems: 'left',
-      justifyContent: 'center',
-      padding: 10,
-      borderColor: 'black',
-      borderWidth: 1
-    },
-
-    //doesn't like flex here for some reason
-
-    flex: {
-        flexWrap: "wrap",
-        direction: "row",
-        justifyContent: "space-between",
-        px: 6
-    },
-    pressable: {
-        w: '47%', 
-        backgroundColor: "white",
-        rounded: "md",
-        shadow: 2,
-        pt: 0.3,
-        my: 3,
-        pb: 2,
-        overflow: "hidden",
-        padding: 10,
-        margin: 10,
-        marginTop: 10,
-        marginBottom: 10,
-        borderRadius: 10,
-    },
-    
-});
 
 export {VendorScreen}

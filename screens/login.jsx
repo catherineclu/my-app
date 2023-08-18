@@ -5,7 +5,7 @@ import React, {useEffect, useState} from 'react';
 import { KeyboardAvoidingView, View, Text, TextInput, Button, Image, SafeAreaView, StyleSheet, Dimensions, Pressable, TouchableOpacity, StatusBar, useColorScheme } from 'react-native';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
 import { auth } from '../firebaseConfig.js';
-import styles from '../style.js'
+import styles from '../style.js';
 import { useNavigation } from '@react-navigation/native';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 import { db } from '../firebaseConfig';
@@ -22,7 +22,6 @@ export const NewLoginScreen = ({navigation}) => {
     const [newDeliveryAddress, setDeliveryAddress] = useState("")
 
     const [newCart, setCart] = useState([])
-    //const usersCollectionRef = collection(db, "users")
 
     const RegisterUser = ()=>{
         
@@ -61,7 +60,7 @@ export const NewLoginScreen = ({navigation}) => {
 
 
     return (
-        <SafeAreaView style={styles.layout}>
+        <SafeAreaView style={{flex: 1}}>
             <View style={styles.header}>
                 <Text onPress={() => navigation.navigate('HomeScreen')} style={styles.headerText}>JipBap</Text>
                 {/* <Pressable onPress={() => navigation.navigate('CartScreen')}>
@@ -69,89 +68,41 @@ export const NewLoginScreen = ({navigation}) => {
                 </Pressable> */}
                 
             </View>
-            {/* <Text>Login</Text> */}
+            
             <KeyboardAvoidingView style={styles.container} behavior="padding">
-                <View style={loginstyles.inputContainer}>
+
+            {/* the following text won't get styled for some reason: */}
+            <Text styles={styles.bodytext}>Welcome to JipBap! Please log in to get started.</Text>
+                <View style={styles.inputContainer}>
                     <TextInput placeholder="Email" 
                                 value={email} 
                                 onChangeText={text => setEmail(text)} 
-                                style={loginstyles.input}
+                                style={styles.input}
                                 />
                     <TextInput placeholder="Password" 
                                 value={password} 
                                 onChangeText={text => setPassword(text)} 
-                                style={loginstyles.input}
+                                style={styles.input}
                                 secureTextEntry={true}
                                 />
                 </View>
 
-                <View style={loginstyles.buttonContainer}>
+                <View style={styles.buttonContainer}>
 
-                <View>
+                {/* <View> */}
                     <TouchableOpacity
                         onPress={LogInUser}
-                        style={loginstyles.button}>
-                        <Text style={loginstyles.buttonText}>Login</Text>
+                        style={styles.button}>
+                        <Text style={styles.buttonText}>Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={RegisterUser}
-                        style={[loginstyles.button, loginstyles.buttonOutline]}>
-                        <Text style={loginstyles.buttonOutlineText} >Register</Text>
+                        style={[styles.button, styles.buttonOutline]}>
+                        <Text style={styles.buttonOutlineText} >Register</Text>
                     </TouchableOpacity>
-                </View>
-
-                    {/* {isSignedIn === false?
-                    :
-                    <TouchableOpacity
-                        onPress={SignOutUser}
-                        style={[loginstyles.button, loginstyles.buttonOutline]}>
-                        <Text style={loginstyles.buttonOutlineText} >Sign Out</Text>
-                    </TouchableOpacity>
-                    }                    */}
+                {/* </View> */}
                 </View>
             </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }
-
-const loginstyles = StyleSheet.create({
-    inputContainer: {
-        width: '80%', 
-    },
-    input: {
-        backgroundColor: 'white',
-        paddingHorizontal: 15,
-        paddingVertical: 10,
-        borderRadius:10,
-        marginTop: 5,
-    },
-    buttonContainer: {
-        width: '60%', //probably need to adjust this
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 40,
-    },
-    button: {
-        backgroundColor: "#1D7151",
-        width: "100%",
-        padding: 15,
-        borderRadius: 10,
-        alignItems: "center",
-    },
-    buttonText:{
-        color: "#fffdf0",
-        fontWeight: "700",
-        fontSize: 16
-    },
-    buttonOutline: {
-        backgroundColor: "#fffdf0",
-        marginTop: 5,
-        borderColor: "#1D7151",
-        borderWidth: 1, //add?
-    },
-    buttonOutlineText: {
-        color: "#1D7151",
-        fontWeight: "700",
-        fontSize: 16
-    },
-})
