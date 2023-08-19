@@ -13,16 +13,43 @@ import { NewLoginScreen } from './screens/login';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {useFonts} from "expo-font";
 import { initStripe } from '@stripe/stripe-react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const screenOptions = (route, color) => {
+    let iconName;
+  
+    switch (route.name) {
+      case 'Home':
+        iconName = 'home';
+        break;
+      case 'Cart':
+        iconName = 'shoppingcart';
+        break;
+      default:
+        break;
+    }
+    return <Icon name={iconName} color={color} size={24} />;
+}
+
 const MyTab = () => {
     return (
-        <Tab.Navigator>
-            <Tab.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }}/>
-            <Tab.Screen name="CartScreen" component={CartScreen} options={{ headerShown: false }}/>
+        <Tab.Navigator screenOptions={({route}) => ({
+            tabBarIcon: ({color}) => screenOptions(route, color),
+          })} tabBarOptions={{
+            activeTintColor: '#1D7151',
+            inactiveTintColor: '#8CD195',
+            style: {
+              borderTopColor: '#66666666',
+              backgroundColor: 'transparent',
+              elevation: 0,
+            },
+          }}> 
+            <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
+            <Tab.Screen name="Cart" component={CartScreen} options={{ headerShown: false }}/>
         </Tab.Navigator>
     );
 }
