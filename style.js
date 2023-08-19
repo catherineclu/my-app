@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderRadius:10,
         marginTop: 5,
+        fontFamily: 'Varela',
     },
 
     //BUTTONS

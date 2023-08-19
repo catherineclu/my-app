@@ -80,10 +80,7 @@ const VendorScreen = ({navigation}) => {
 
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>JipBap</Text>
-                <Pressable onPress={() => navigation.navigate('CartScreen')}>
-                    <Image style={{ height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
-                </Pressable>
+                <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
             </View>
 
             {/* <Pressable onPress={getVendor}>

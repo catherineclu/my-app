@@ -49,7 +49,6 @@ export const LoginScreen = ({}) => {
             <View style={styles.header}>
                 <Text style={{fontSize: 30, fontWeight: "bold", textAlign: "center", marginLeft: 110}}>[App Name]</Text>
                 <Pressable onPress={() => navigation.navigate('CartScreen')}>
-                    <Image style={{width: 40, height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
                 </Pressable>
                 
             </View>

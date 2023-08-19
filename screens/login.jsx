@@ -62,17 +62,16 @@ export const NewLoginScreen = ({navigation}) => {
     return (
         <SafeAreaView style={{flex: 1}}>
             <View style={styles.header}>
-                <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
-                {/* <Pressable onPress={() => navigation.navigate('CartScreen')}>
-                    <Image style={{width: 40, height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
-                </Pressable> */}
-                
+                <Text style={styles.headerText}>JipBap</Text>
             </View>
             
             <KeyboardAvoidingView style={styles.container} behavior="padding">
 
             {/* the following text won't get styled for some reason: */}
-            <Text styles={styles.bodytext}>Welcome to JipBap! Please log in to get started.</Text>
+            <Text style={styles.subheading}>Welcome to JipBap!</Text>
+            <Image style={{width: 250, height: 250}} source={require('../assets/logo.png')} />
+            <Text style={styles.bodytext}>Please log in to get started.</Text>
+
                 <View style={styles.inputContainer}>
                     <TextInput placeholder="Email" 
                                 value={email} 

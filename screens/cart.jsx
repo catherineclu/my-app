@@ -70,8 +70,9 @@ export const CartScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
-                <Text style={[styles.headerText, {fontSize: 30, fontWeight: "bold", textAlign: "center"}]}>Cart</Text>
+                <Text style={styles.headerText}>JipBap</Text>
             </View>
+            <Text>Cart</Text>
 
 
             {cart.map((item) => {

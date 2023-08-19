@@ -97,10 +97,7 @@ export const ItemScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
-                <Text style={{fontSize: 30, fontWeight: "bold", textAlign: "center", marginLeft: 110}}>JipBap</Text>
-                <Pressable onPress={() => navigation.navigate('CartScreen')}>
-                    <Image style={{height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
-                </Pressable>
+                <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
             </View>
             <ScrollView px={5} showsVerticalScrollIndicator={false} >
             <View style={ItemStyles.imagecontainer}>
