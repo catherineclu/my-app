@@ -41,7 +41,7 @@ const MyStack = () => {
         // https://firebase.google.com/docs/reference/js/auth.user
         // ...
             console.log("signed in")
-            setHomeRoute("HomeScreen")
+            setHomeRoute("Main")
             
         } else {
             console.log("signed out")
@@ -87,7 +87,7 @@ const MyStack = () => {
     <NavigationContainer>
         {console.log(homeRoute)}
     <Stack.Navigator initialRouteName={homeRoute}>
-        <Stack.Screen name="HomeScreen" component={MyTab} options={{ headerShown: false }}/>
+        <Stack.Screen name="Main" component={MyTab} options={{ headerShown: false }}/>
         <Stack.Screen name="VendorScreen" component={VendorScreen}/>
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="ItemScreen" component={ItemScreen}/>

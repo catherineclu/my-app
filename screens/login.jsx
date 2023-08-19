@@ -30,7 +30,7 @@ export const NewLoginScreen = ({navigation}) => {
             setIsSignedIn(true);
             setDoc(doc(db, "users", auth.currentUser.uid), {email: email, password: password, address: newDeliveryAddress })
             console.log("signed in")
-            navigation.replace("HomeScreen")
+            navigation.replace("Main")
         })
         .catch((re)=>{
             console.log(re);
@@ -41,7 +41,7 @@ export const NewLoginScreen = ({navigation}) => {
         signInWithEmailAndPassword(auth, email, password)
         .then((re)=>{
             setIsSignedIn(true);
-            navigation.replace("HomeScreen")
+            navigation.replace("Main")
         })
         .catch((re)=>{
             console.log(re);
@@ -62,7 +62,7 @@ export const NewLoginScreen = ({navigation}) => {
     return (
         <SafeAreaView style={{flex: 1}}>
             <View style={styles.header}>
-                <Text onPress={() => navigation.navigate('HomeScreen')} style={styles.headerText}>JipBap</Text>
+                <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
                 {/* <Pressable onPress={() => navigation.navigate('CartScreen')}>
                     <Image style={{width: 40, height: 40, marginLeft: 50, justifyContent: "flex-end"}} source={require('../assets/cart.png')} alt="cart"/>
                 </Pressable> */}
