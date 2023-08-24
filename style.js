@@ -195,6 +195,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
     },
+    incr: {
+        
+    },
 
     //COMING SOON - general image styling
 

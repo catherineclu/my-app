@@ -20,6 +20,7 @@ const VendorScreen = ({navigation}) => {
     const [vendorId, setVendorId] = useState("");
     const [vendorDocRef, setVendorDocRef] = useState();
     const [menuCollectionRef, setMenuCollectionRef] = useState();
+    const [imgPath, setImgPath] = useState(require("../assets/images/cucumber.jpg")); 
 
     const getData = async () => {
         try {
@@ -90,24 +91,22 @@ const VendorScreen = ({navigation}) => {
             <ScrollView width="100%" showsVerticalScrollIndicator={false}>
                 
                 <View style={styles.container}>
-                    <Image source={require("../assets/images/cucumber.jpg")} 
-                            alt="cucumber image" 
-                            w="100%" 
-                            h="100%" 
-                            resizeMode="contain"
+                    <Image source={imgPath} 
+                            alt="cucumber image"
+                            style={{width:"100%"}}
                     />
 
-                    <View style={{ width:"100%", flexDirection:'row'}}>
-                        <View style={styles.container}>
+                    <View style={{ width:"100%", flexDirection:'row', backgroundColor: "#fffdf0"}}>
+                        <View style={{flex: 1, justifyContent: 'center'}} >
                             <Text style={styles.subheading}>{vendorInfo.name}</Text>
                         </View>
 
-                        <View style={styles.container}>
+                        <View style={{alignItems:"right"}}>
                             <Text style={[styles.bodytext, {textAlign: 'right'}]}>{vendorInfo.location}</Text>
                         </View>
                     </View>
                     <View style={[styles.container, {paddingBottom: 10}]}>
-                        <Text style={styles.subheadingTwo}>Information:</Text>
+                        <Text style={[styles.headerTwoText, {margin: "5%"}]}>Information:</Text>
                         <Text style={styles.bodytext}>{vendorInfo.description}</Text>
                     </View>
                 </View>

@@ -113,13 +113,13 @@ export const ItemScreen = ({navigation}) => {
 
                 <View style={counterStyles.countercontainer}>
                     {/* NEED TO MAKE TOUCHABLE OPACITY THICKER */}
-                    <TouchableOpacity style={counterStyles.button} onPress={decrement}><Text styles={styles.bodytext}>-</Text></TouchableOpacity>
+                    <TouchableOpacity style={{width:"20%", height: "100%", justifyContent:"center", alignItems:"center"}} onPress={decrement}><Text styles={styles.bodytext}>-</Text></TouchableOpacity>
                     {/* <Button title="-" style={counterStyles.button} onPress={decrement} /> */}
                     <View>
                     <Text>{quantity}</Text>
                     </View>
                     {/* <Button title="+" style={counterStyles.button} onPress={increment} /> */}
-                    <TouchableOpacity style={counterStyles.button} onPress={increment}><Text styles={styles.bodytext}>+</Text></TouchableOpacity>
+                    <TouchableOpacity style={{width:"20%", height: "100%", justifyContent:"center", alignItems:"center"}} onPress={increment}><Text styles={styles.bodytext}>+</Text></TouchableOpacity>
                 </View>
             </View>
             
@@ -193,13 +193,15 @@ const ItemStyles = StyleSheet.create({
         backgroundColor: "#fffdf0",
         borderColor: "#1D7151",
         borderWidth: 1,
-        width: "40%",
+        width: "50%",
+        height: "20%",
         padding: 15,
         borderRadius: 10,
         alignItems: "center",
         justifyContent: 'space-between',
         paddingHorizontal: 20,
         marginBottom: 10,
+        
     },
     button:{
         flexDirection: 'row',
