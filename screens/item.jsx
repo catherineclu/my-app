@@ -113,13 +113,13 @@ export const ItemScreen = ({navigation}) => {
 
                 <View style={counterStyles.countercontainer}>
                     {/* NEED TO MAKE TOUCHABLE OPACITY THICKER */}
-                    <TouchableOpacity style={{width:"20%", height: "100%", justifyContent:"center", alignItems:"center"}} onPress={decrement}><Text styles={styles.bodytext}>-</Text></TouchableOpacity>
+                    <TouchableOpacity style={{width:"20%", height: "100%", justifyContent:"center", alignItems:"center"}} onPress={decrement}><Text style={styles.bodytext}>-</Text></TouchableOpacity>
                     {/* <Button title="-" style={counterStyles.button} onPress={decrement} /> */}
                     <View>
                     <Text>{quantity}</Text>
                     </View>
                     {/* <Button title="+" style={counterStyles.button} onPress={increment} /> */}
-                    <TouchableOpacity style={{width:"20%", height: "100%", justifyContent:"center", alignItems:"center"}} onPress={increment}><Text styles={styles.bodytext}>+</Text></TouchableOpacity>
+                    <TouchableOpacity style={{width:"20%", height: "100%", justifyContent:"center", alignItems:"center"}} onPress={increment}><Text style={styles.bodytext}>+</Text></TouchableOpacity>
                 </View>
             </View>
             
