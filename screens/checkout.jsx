@@ -1,6 +1,8 @@
 import React from "react"
-import { View, Button } from "react-native";
+import { SafeAreaView, View, Text, TouchableOpacity } from "react-native";
 import { CardField, useStripe, useConfirmPayment } from '@stripe/stripe-react-native';
+import styles from '../style';
+
 
 export const CheckoutScreen = ({navigation}) => {
     const {confirmPayment, loading} = useConfirmPayment();
@@ -48,7 +50,8 @@ export const CheckoutScreen = ({navigation}) => {
       };
 
   return (
-    <View>
+    <SafeAreaView style={styles.layout}>
+        <Text style={styles.bodytext}>Card Information</Text>
       <CardField
         postalCodeEnabled={true}
         placeholders={{
@@ -61,7 +64,7 @@ export const CheckoutScreen = ({navigation}) => {
         style={{
           width: '100%',
           height: 50,
-          marginVertical: 30,
+          marginBottom: 15,
         }}
         onCardChange={(cardDetails) => {
           console.log('cardDetails', cardDetails);
@@ -70,7 +73,11 @@ export const CheckoutScreen = ({navigation}) => {
           console.log('focusField', focusedField);
         }}
       />
-        <Button onPress={handlePayPress} title="Pay"/>
-    </View>
+        <TouchableOpacity
+                        onPress={handlePayPress} 
+                        style={[styles.button, {width: '99%'}]}>
+                        <Text style={styles.buttonText} >Pay</Text>
+            </TouchableOpacity>
+    </SafeAreaView>
   );
 }
