@@ -39,6 +39,17 @@ export const CartScreen = ({navigation}) => {
         console.log("deleted")
     }
 
+    // const increment = async(id) => {
+    //     const itemRef = doc(usersDocRef, "cart", id)
+
+    //     const res = await itemRef.set({
+    //         quantity: 0
+    //     }, { merge: true });
+
+    //     console.log("increment");
+
+    // }
+
     useEffect(() => {
         const getCart = async() => {
             const data = await getDocs(cartCollectionRef);
@@ -55,17 +66,7 @@ export const CartScreen = ({navigation}) => {
         return total;
     };
 
-    // const increment = async(id) => {
-    //     try {
-    //         const itemDoc = doc(usersDocRef, "cart", id);
-    //         itemDocData = await getDoc(itemDoc)
-    
-    //         await itemDoc.update({ quantity: itemDocData.data().quantity + 1 });
-    //         console.log("increment");
-    //     } catch (error) {
-    //         console.error("Error in increment:", error);
-    //     }
-    // }
+
 
   
     // const decrement = () => {
@@ -101,13 +102,15 @@ export const CartScreen = ({navigation}) => {
             <View style={styles.header}>
                 <Text style={styles.headerText}>JipBap</Text>
             </View>
-
+            
             <View style={{marginTop: 20, width: '100%'}}>
                 {cart.map((item) => {
                     return <View style={[cartstyles.item]}>
                         <View style={{ alignItems: 'flex-start'}}>
                             <Text style={styles.subheading}>{item.name}</Text>
                             <Text style={styles.bodytext}>Quantity: {item.quantity}</Text>
+                            {/* <Icon style={{marginRight: 10}} name="plus" size={35} color="#1D7151" onPress={() => {increment(item.id)}}/> */}
+
                         </View>
                         {/* <View style={cartstyles.countercontainer}>
                             <TouchableOpacity style={{width:"20%", height: "100%", justifyContent:"center", alignItems:"center"}} ><Text style={styles.bodytext}>-</Text></TouchableOpacity>
@@ -143,7 +146,7 @@ const cartstyles = StyleSheet.create({
     item: {
         borderWidth: 0.5,
         borderColor: "#1D7151",
-        backgroundColor: "#F6f1D1",
+        backgroundColor: "#fffdf0",
         flexDirection: "row",
         alignItems: 'left',
         justifyContent: 'space-between',
