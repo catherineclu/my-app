@@ -7,6 +7,8 @@ import { auth } from '../firebaseConfig.js';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { db } from '../firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/AntDesign';
+
 
 export const ItemScreen = ({navigation}) => {
     const usersDocRef = doc(db, "users", auth.currentUser.uid)
@@ -96,8 +98,11 @@ export const ItemScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.layout}>
-            <View style={styles.header}>
+            <View style={[styles.header, {justifyContent: 'space-between'}]}>
+                <Icon marginLeft={10} name="left" size={25} color="#fffdf0" onPress={() => navigation.navigate('VendorScreen')} />
                 <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
+                <Icon marginRight={10} name="left" size={25} color="#1D7151" />
+
             </View>
             <ScrollView px={5} showsVerticalScrollIndicator={false} >
             <View style={ItemStyles.imagecontainer}>

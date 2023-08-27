@@ -115,11 +115,11 @@ const MyStack = () => {
         {console.log(homeRoute)}
     <Stack.Navigator initialRouteName={homeRoute}>
         <Stack.Screen name="Main" component={MyTab} options={{ headerShown: false }}/>
-        <Stack.Screen name="VendorScreen" component={VendorScreen}/>
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="ItemScreen" component={ItemScreen}/>
+        <Stack.Screen name="VendorScreen" component={VendorScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="ItemScreen" component={ItemScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="NewLoginScreen" component={NewLoginScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="CheckoutScreen" component={CheckoutScreen}/>
+        <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} options={{ headerShown: false }}/>
     </Stack.Navigator>
     </NavigationContainer>
 

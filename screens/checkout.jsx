@@ -2,6 +2,8 @@ import React from "react"
 import { SafeAreaView, View, Text, TouchableOpacity } from "react-native";
 import { CardField, useStripe, useConfirmPayment } from '@stripe/stripe-react-native';
 import styles from '../style';
+import Icon from 'react-native-vector-icons/AntDesign';
+
 
 
 export const CheckoutScreen = ({navigation}) => {
@@ -51,6 +53,12 @@ export const CheckoutScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.layout}>
+        <View style={[styles.header, {justifyContent: 'space-between'}]}>
+            <Icon marginLeft={10} name="left" size={25} color="#fffdf0" onPress={() => navigation.navigate('Main', { screen: 'CartScreen' })} />
+            <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
+            <Icon marginRight={10} name="left" size={25} color="#1D7151" />
+
+        </View>
         <Text style={styles.bodytext}>Card Information</Text>
       <CardField
         postalCodeEnabled={true}

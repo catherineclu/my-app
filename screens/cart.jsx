@@ -49,7 +49,6 @@ export const CartScreen = ({navigation}) => {
     }, [cart]);
 
     const getTotalCost = () => {
-        console.log(cart)
         const total = cart.reduce((accumulator, item) => {
             return accumulator + (item["price"] * item["quantity"]);
         }, 0);

@@ -6,6 +6,7 @@ import { doc, getDoc, getDocs, collection, addDoc} from "firebase/firestore";
 import {db} from '../firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -80,8 +81,11 @@ const VendorScreen = ({navigation}) => {
     return (
 
         <SafeAreaView style={styles.layout}>
-            <View style={styles.header}>
+            <View style={[styles.header, {justifyContent: 'space-between'}]}>
+                <Icon marginLeft={10} name="left" size={25} color="#fffdf0" onPress={() => navigation.navigate('Main')} />
                 <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
+                <Icon marginRight={10} name="left" size={25} color="#1D7151" />
+
             </View>
 
             {/* <Pressable onPress={getVendor}>
