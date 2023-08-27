@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         //backgroundColor: 'green',
         fontFamily: 'Fredoka',
-        fontSize: 20,
+        fontSize: 25,
         padding: 10
     },
     subheadingTwo: {

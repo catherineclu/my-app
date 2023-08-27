@@ -60,18 +60,16 @@ export const NewLoginScreen = ({navigation}) => {
 
 
     return (
-        <SafeAreaView style={{flex: 1}}>
-            <View style={{width: '100%', height: '30%', backgroundColor: "#1D7151", justifyContent: 'center', alignItems: 'center'}}>
+        <SafeAreaView style={styles.layout}>
+            <View style={{width: '100%', height: '40%', backgroundColor: "#1D7151", justifyContent: 'center', alignItems: 'center'}}>
                 <Image style={{width: 100, height: 100}} source={require('../assets/logo.png')} />
                 <Text style={loginstyles.headerText}>JipBap</Text>
             </View>
             
-
-            
-            <KeyboardAvoidingView style={styles.container} behavior="padding">
+            {/* <KeyboardAvoidingView style={styles.container} behavior="padding"> */}
 
             {/* the following text won't get styled for some reason: */}
-            <Text style={styles.subheading}>Welcome to JipBap!</Text>
+            <Text style={[styles.subheading, {paddingTop: 20, paddingBottom: 50}]}>Welcome to JipBap!</Text>
             <Text style={styles.bodytext}>Please log in to get started.</Text>
 
                 <View style={styles.inputContainer}>
@@ -103,7 +101,7 @@ export const NewLoginScreen = ({navigation}) => {
                     </TouchableOpacity>
                 {/* </View> */}
                 </View>
-            </KeyboardAvoidingView>
+            {/* </KeyboardAvoidingView> */}
         </SafeAreaView>
     );
 }
