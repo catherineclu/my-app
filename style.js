@@ -77,6 +77,13 @@ const styles = StyleSheet.create({
         margin: 10
     },
 
+    errortext: {
+        fontFamily: 'Varela',
+        padding: 5,
+        fontSize: 18,
+        margin: 10,
+        color: "#FF0000",
+    },
 
     // TEXT INPUT
 

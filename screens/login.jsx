@@ -21,7 +21,7 @@ export const NewLoginScreen = ({navigation}) => {
     const [users, setUsers] = useState([]);
     const [newDeliveryAddress, setDeliveryAddress] = useState("")
 
-    const [newCart, setCart] = useState([])
+    const [errorMessage, setErrorMessage] = useState("")
 
     const RegisterUser = ()=>{
         
@@ -33,7 +33,8 @@ export const NewLoginScreen = ({navigation}) => {
             navigation.replace("Main")
         })
         .catch((re)=>{
-            console.log(re);
+            console.log(re.message);
+            showError(re.message);
         })
         
     }
@@ -44,7 +45,8 @@ export const NewLoginScreen = ({navigation}) => {
             navigation.replace("Main")
         })
         .catch((re)=>{
-            console.log(re);
+            console.log(re.message);
+            showError(re.message);
         })
     }
 
@@ -55,9 +57,20 @@ export const NewLoginScreen = ({navigation}) => {
         })
         .catch((err)=>{
             console.log(err);
+            showError(err);
         })
     }
 
+    const showError = (re) => {
+        setErrorMessage(re)
+        .then((error)=>{ //raises a type error, I don't know why.
+            navigation.replace('NewLoginScreen');
+            console.log(errorMessage);
+        })
+        .catch ((error)=>{
+            console.log(error)
+        })
+    };
 
     return (
         <SafeAreaView style={styles.layout}>
@@ -69,7 +82,7 @@ export const NewLoginScreen = ({navigation}) => {
             {/* <KeyboardAvoidingView style={styles.container} behavior="padding"> */}
 
             {/* the following text won't get styled for some reason: */}
-            <Text style={[styles.subheading, {paddingTop: 20, paddingBottom: 50}]}>Welcome to JipBap!</Text>
+            <Text style={[styles.subheading, {paddingTop: 20, paddingBottom: 10}]}>Welcome to JipBap!</Text>
             <Text style={styles.bodytext}>Please log in to get started.</Text>
 
                 <View style={styles.inputContainer}>
@@ -85,7 +98,7 @@ export const NewLoginScreen = ({navigation}) => {
                                 secureTextEntry={true}
                                 />
                 </View>
-
+                <Text style={styles.errortext}>{errorMessage}</Text>
                 <View style={styles.buttonContainer}>
 
                 {/* <View> */}
