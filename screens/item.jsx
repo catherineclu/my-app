@@ -15,6 +15,7 @@ export const ItemScreen = ({navigation}) => {
     //const cartCollectionRef = collection(usersDocRef, "cart")
     const [quantity, setQuantity] = useState(0);
     const [itemInfo, setItemInfo] = useState("");
+    const [errorMessage, setErrorMessage] = useState("")
 
     const getItemId = async () => {
         try {
@@ -82,8 +83,20 @@ export const ItemScreen = ({navigation}) => {
         //navigation.replace("VendorScreen");
         navigation.goBack()
         } else {
-            console.log("item quantity must be more than 0 to add to cart")
+            console.log("item quantity must be more than 0 to add to cart");
+            showError("item quantity must be more than 0 to add to cart");
         }
+    };
+
+    const showError = (re) => {
+        setErrorMessage(re)
+        .then((error)=>{ //raises a type error, I don't know why.
+            navigation.replace('NewLoginScreen');
+            console.log(errorMessage);
+        })
+        .catch ((error)=>{
+            console.log(error)
+        })
     };
     
     const increment = () => {
@@ -104,32 +117,30 @@ export const ItemScreen = ({navigation}) => {
                 <Icon marginRight={10} name="left" size={25} color="#1D7151" />
 
             </View>
-            <ScrollView px={5} showsVerticalScrollIndicator={false} >
-            <View style={ItemStyles.imagecontainer}>
+            <ScrollView styles={{width: "100%"}} showsVerticalScrollIndicator={false} >
+            <View style={styles.container}>
                 <Image source={require("../assets/images/cucumber.jpg")} 
-                        alt="cucumber image" 
-                        w="full" 
-                        h={300} 
-                        resizeMode="contain"
+                       styles={styles.banner}
                         ></Image>
                 <Text style={styles.headerTwoText}>{itemInfo.name}</Text>
                 <Text style={styles.bodytext}>Item description: {itemInfo.description}</Text>
-                <Text style={styles.bodytext}>Item price: {itemInfo.price}</Text>
+                <Text style={styles.bodytext}>Item price: ${itemInfo.price}</Text>
 
                 <View style={counterStyles.countercontainer}>
                     {/* NEED TO MAKE TOUCHABLE OPACITY THICKER */}
-                    <TouchableOpacity style={{width:"20%", height: "100%", justifyContent:"center", alignItems:"center"}} onPress={decrement}><Text style={styles.bodytext}>-</Text></TouchableOpacity>
+                    <TouchableOpacity style={{width:"20%", height: "100%", justifyContent:"center", alignItems:"center"}} onPress={decrement}><Text style={ItemStyles.buttonText}>-</Text></TouchableOpacity>
                     {/* <Button title="-" style={counterStyles.button} onPress={decrement} /> */}
                     <View>
                     <Text>{quantity}</Text>
                     </View>
                     {/* <Button title="+" style={counterStyles.button} onPress={increment} /> */}
-                    <TouchableOpacity style={{width:"20%", height: "100%", justifyContent:"center", alignItems:"center"}} onPress={increment}><Text style={styles.bodytext}>+</Text></TouchableOpacity>
+                    <TouchableOpacity style={{width:"20%", height: "100%", justifyContent:"center", alignItems:"center"}} onPress={increment}><Text style={ItemStyles.buttonText}>+</Text></TouchableOpacity>
                 </View>
             </View>
             
             </ScrollView>
             <View style={ItemStyles.buttonContainer}>
+            <Text style={styles.errortext}>{errorMessage}</Text>
                 <TouchableOpacity
                         onPress={() => createItem(itemInfo.name, itemInfo.price)}
                         style={styles.button}>
@@ -168,9 +179,9 @@ const ItemStyles = StyleSheet.create({
         alignItems: "center"
     },
     buttonText:{
-        color: "white",
+        color: "black",
         fontWeight: "700",
-        fontSize: 16
+        fontSize: 25
     },
 
 
@@ -198,7 +209,7 @@ const ItemStyles = StyleSheet.create({
         backgroundColor: "#fffdf0",
         borderColor: "#1D7151",
         borderWidth: 1,
-        width: "50%",
+        width: "60%",
         height: "20%",
         padding: 15,
         borderRadius: 10,

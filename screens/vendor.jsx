@@ -83,7 +83,11 @@ const VendorScreen = ({navigation}) => {
         <SafeAreaView style={styles.layout}>
             <View style={[styles.header, {justifyContent: 'space-between'}]}>
                 <Icon marginLeft={10} name="left" size={25} color="#fffdf0" onPress={() => navigation.navigate('Main')} />
-                <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
+                <View style={{flexWrap: "in-row"}}>
+                    <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
+                    
+                </View>
+                
                 <Icon marginRight={10} name="left" size={25} color="#1D7151" />
 
             </View>
@@ -97,7 +101,7 @@ const VendorScreen = ({navigation}) => {
                 <View style={styles.container}>
                     <Image source={imgPath} 
                             alt="cucumber image"
-                            style={{width:"100%"}}
+                            style={styles.banner}
                     />
 
                     <View style={{ width:"100%", flexDirection:'row', backgroundColor: "#fffdf0"}}>
@@ -132,7 +136,7 @@ const VendorScreen = ({navigation}) => {
                                         <Text style={styles.vendorName}>{item.name}</Text>
                                     </View>
                                     <View style={{alignItems: "flex-end", marginRight: 10, flex: 1}}>
-                                        <Text styles={styles.bodytext}>{item.price}</Text>
+                                        <Text styles={styles.bodytext}>${item.price}</Text>
                                         {/* <Text>[Pickup Time]</Text> */}
                                     </View>
                                 </View>

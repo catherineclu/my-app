@@ -202,11 +202,16 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
     },
-    incr: {
-        
-    },
 
-    //COMING SOON - general image styling
+    //Image styling
+
+    banner: {
+        width: "100%",
+    },
+    logo: {
+        width: 35, 
+        height: 35,
+    }
 
 });
 

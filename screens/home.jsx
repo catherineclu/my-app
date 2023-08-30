@@ -63,7 +63,7 @@ export const HomeScreen = ({navigation}) => {
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>JipBap</Text>
-                
+                <Image style={styles.logo} source={require('../assets/logo.png')} />
             </View>
 
             {vendors.map((vendor) => {
