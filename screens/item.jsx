@@ -113,7 +113,10 @@ export const ItemScreen = ({navigation}) => {
         <SafeAreaView style={styles.layout}>
             <View style={[styles.header, {justifyContent: 'space-between'}]}>
                 <Icon marginLeft={10} name="left" size={25} color="#fffdf0" onPress={() => navigation.navigate('VendorScreen')} />
-                <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
+                <View style={{flexDirection: "row"}}>
+                    <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
+                    <Image style={styles.logo} source={require('../assets/logo.png')} />
+                </View>
                 <Icon marginRight={10} name="left" size={25} color="#1D7151" />
 
             </View>

@@ -1,5 +1,5 @@
-import React from "react"
-import { SafeAreaView, View, Text, TouchableOpacity } from "react-native";
+import React, {useState} from "react"
+import { SafeAreaView, View, Text, TouchableOpacity, Image } from "react-native";
 import { CardField, useStripe, useConfirmPayment } from '@stripe/stripe-react-native';
 import styles from '../style';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 
 export const CheckoutScreen = ({navigation}) => {
+    const [errorMessage, setErrorMessage] = useState("")
     const {confirmPayment, loading} = useConfirmPayment();
     // ...
 
@@ -46,16 +47,33 @@ export const CheckoutScreen = ({navigation}) => {
     
         if (error) {
           console.log('Payment confirmation error', error);
+          showError(error)
+
         } else if (paymentIntent) {
           console.log('Success from promise', paymentIntent);
         }
+
+        const showError = (re) => {
+            setErrorMessage(re)
+            .then((error)=>{ //raises a type error, I don't know why.
+                navigation.replace('NewLoginScreen');
+                console.log(errorMessage);
+            })
+            .catch ((error)=>{
+                console.log(error)
+            })
+        };
+        
       };
 
   return (
     <SafeAreaView style={styles.layout}>
         <View style={[styles.header, {justifyContent: 'space-between'}]}>
             <Icon marginLeft={10} name="left" size={25} color="#fffdf0" onPress={() => navigation.navigate('Main', { screen: 'CartScreen' })} />
-            <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
+            <View style={{flexDirection: "row"}}>
+                    <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
+                    <Image style={styles.logo} source={require('../assets/logo.png')} />
+            </View>
             <Icon marginRight={10} name="left" size={25} color="#1D7151" />
 
         </View>
@@ -81,6 +99,7 @@ export const CheckoutScreen = ({navigation}) => {
           console.log('focusField', focusedField);
         }}
       />
+      <Text style={styles.errortext}>{errorMessage}</Text>
         <TouchableOpacity
                         onPress={handlePayPress} 
                         style={[styles.button, {width: '99%'}]}>

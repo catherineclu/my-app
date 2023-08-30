@@ -83,9 +83,9 @@ const VendorScreen = ({navigation}) => {
         <SafeAreaView style={styles.layout}>
             <View style={[styles.header, {justifyContent: 'space-between'}]}>
                 <Icon marginLeft={10} name="left" size={25} color="#fffdf0" onPress={() => navigation.navigate('Main')} />
-                <View style={{flexWrap: "in-row"}}>
+                <View style={{flexDirection: "row"}}>
                     <Text onPress={() => navigation.navigate('Main')} style={styles.headerText}>JipBap</Text>
-                    
+                    <Image style={styles.logo} source={require('../assets/logo.png')} />
                 </View>
                 
                 <Icon marginRight={10} name="left" size={25} color="#1D7151" />

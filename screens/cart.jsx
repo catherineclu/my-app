@@ -101,6 +101,7 @@ export const CartScreen = ({navigation}) => {
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>JipBap</Text>
+                <Image style={styles.logo} source={require('../assets/logo.png')} />
             </View>
             
             <View style={{marginTop: 20, width: '100%'}}>
