@@ -10,6 +10,7 @@ import {LoginScreen} from './screens/logins';
 import {ItemScreen} from './screens/item';
 import { CheckoutScreen } from './screens/checkout';
 import { NewLoginScreen } from './screens/login';
+import { ConfirmationScreen } from './screens/confirmation';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {useFonts} from "expo-font";
 import { initStripe } from '@stripe/stripe-react-native';
@@ -120,6 +121,8 @@ const MyStack = () => {
         <Stack.Screen name="ItemScreen" component={ItemScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="NewLoginScreen" component={NewLoginScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="ConfirmationScreen" component={ConfirmationScreen} options={{ headerShown: false }}/>
+
     </Stack.Navigator>
     </NavigationContainer>
 

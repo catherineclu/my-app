@@ -36,6 +36,17 @@ export const CheckoutScreen = ({navigation}) => {
             email: auth.currentUser.email,
           });
 
+        navigation.navigate('ConfirmationScreen')
+
+        // const data = await getDocs(cartCollectionRef);
+        // setCart(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+
+        // await setDoc(doc(db, "cities", "LA"), {
+        // name: "Los Angeles",
+        // state: "CA",
+        // country: "USA"
+        // });
+
         console.log("added order")
     }
       const handlePayPress = async () => {
