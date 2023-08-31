@@ -117,9 +117,9 @@ export const CartScreen = ({navigation}) => {
                         <View style={{ alignItems: 'flex-start'}}>
                             <Text style={styles.subheading}>{item.name}</Text>
                             <View style={{flexDirection: "row", alignItems: 'center'}}>
-                                <Icon style={{marginRight: 10}} name="plus" size={35} color="#1D7151" onPress={() => {addOne(item.id)}}/>
-                                <Text style={styles.bodytext}>{item.quantity}</Text>
                                 <Icon style={{marginRight: 10}} name="minus" size={35} color="#1D7151" onPress={() => {deleteOne(item.id)}}/>
+                                <Text style={styles.bodytext}>{item.quantity}</Text>
+                                <Icon style={{marginRight: 10}} name="plus" size={35} color="#1D7151" onPress={() => {addOne(item.id)}}/>
                             </View>
 
 
