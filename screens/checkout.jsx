@@ -3,6 +3,9 @@ import { SafeAreaView, View, Text, TouchableOpacity, Image } from "react-native"
 import { CardField, useStripe, useConfirmPayment } from '@stripe/stripe-react-native';
 import styles from '../style';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { db } from '../firebaseConfig';
+import { doc, setDoc, collection, addDoc} from 'firebase/firestore';
+import { auth } from '../firebaseConfig.js';
 
 
 
@@ -28,6 +31,13 @@ export const CheckoutScreen = ({navigation}) => {
         return clientSecret;
       };
     
+      const submitOrder = async () => {
+        await addDoc(collection(db, "orders"), {
+            email: auth.currentUser.email,
+          });
+
+        console.log("added order")
+    }
       const handlePayPress = async () => {
         // Gather the customer's billing information (for example, email)
         const billingDetails = {
@@ -44,6 +54,8 @@ export const CheckoutScreen = ({navigation}) => {
             billingDetails,
           },
         });
+
+        
     
         if (error) {
           console.log('Payment confirmation error', error);
@@ -101,7 +113,7 @@ export const CheckoutScreen = ({navigation}) => {
       />
       <Text style={styles.errortext}>{errorMessage}</Text>
         <TouchableOpacity
-                        onPress={handlePayPress} 
+                        onPress={submitOrder} 
                         style={[styles.button, {width: '99%'}]}>
                         <Text style={styles.buttonText} >Pay</Text>
             </TouchableOpacity>
