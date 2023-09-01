@@ -1,10 +1,10 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import { SafeAreaView, View, Text, TouchableOpacity, Image } from "react-native";
 import { CardField, useStripe, useConfirmPayment } from '@stripe/stripe-react-native';
 import styles from '../style';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { db } from '../firebaseConfig';
-import { doc, setDoc, collection, addDoc, getDoc} from 'firebase/firestore';
+import { doc, setDoc, collection, addDoc, getDocs} from 'firebase/firestore';
 import { auth } from '../firebaseConfig.js';
 
 
@@ -12,9 +12,22 @@ import { auth } from '../firebaseConfig.js';
 export const CheckoutScreen = ({navigation}) => {
     const [errorMessage, setErrorMessage] = useState("")
     const {confirmPayment, loading} = useConfirmPayment();
+    const [cart, setCart] = useState([]);
+
+    const usersDocRef = doc(db, "users", auth.currentUser.uid)
+    const cartCollectionRef = collection(usersDocRef, "cart")
+
     // ...
 
+    useEffect(() => {
+        const getCart = async() => {
+            const data = await getDocs(cartCollectionRef);
+            setCart(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+        };
         
+        getCart();
+    }, [cart]);
+
     const API_URL = 'server.js'
     const fetchPaymentIntentClientSecret = async () => {
         const response = await fetch(`${API_URL}/create-payment-intent`, {
@@ -30,31 +43,13 @@ export const CheckoutScreen = ({navigation}) => {
     
         return clientSecret;
       };
+
     
       const submitOrder = async () => {
 
+        const orderRef = await addDoc(collection(db, "orders"), {email: auth.currentUser.email, cart: cart});
 
-        // const usersDocRef = doc(db, "users", auth.currentUser.uid)
-        // const cartRef = collection(orderRef, 'cart');
-        // const cartCollectionRef = collection(usersDocRef, "cart")
-
-        // userDocData = await getDoc(usersDocRef)
-        // console.log(userDocData.data())
-        // console.log(cartCollectionRef.data())
         
-
-        const orderRef = await addDoc(collection(db, "orders"), {email: auth.currentUser.email});
-        // await orderRef.doc(auth.currentUser.uid).setDoc(userDocData.data());
-
-    
-        // const cartData = await getDocs(cartRef);
-
-        // cartData.forEach((cartItem) => {
-        //     console.log(cartItem)
-        //     setDoc(doc(orderRef, "cart", cartItem), {name: itemName, quantity: quantity})
-
-        // });
-
         console.log("added order")
 
         navigation.navigate('ConfirmationScreen')

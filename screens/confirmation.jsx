@@ -15,7 +15,7 @@ export const ConfirmationScreen = ({navigation}) => {
             <Text style={styles.subheading}>Order Confirmed</Text>
             <Text style={styles.bodytext}>Thank you for your order!</Text>
             
-            <Text onPress={() => navigation.navigate('Main', { screen: 'HomeScreen' })} style={[styles.bodytext, {textDecorationLine: 'underline'}]}>Back to explore</Text>
+            <Text onPress={() => navigation.replace('Main', { screen: 'HomeScreen' })} style={[styles.bodytext, {textDecorationLine: 'underline'}]}>Back to explore</Text>
 
         </SafeAreaView>
 
