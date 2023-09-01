@@ -4,7 +4,7 @@ import { CardField, useStripe, useConfirmPayment } from '@stripe/stripe-react-na
 import styles from '../style';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { db } from '../firebaseConfig';
-import { doc, setDoc, collection, addDoc} from 'firebase/firestore';
+import { doc, setDoc, collection, addDoc, getDoc} from 'firebase/firestore';
 import { auth } from '../firebaseConfig.js';
 
 
@@ -32,22 +32,32 @@ export const CheckoutScreen = ({navigation}) => {
       };
     
       const submitOrder = async () => {
-        await addDoc(collection(db, "orders"), {
-            email: auth.currentUser.email,
-          });
 
-        navigation.navigate('ConfirmationScreen')
 
-        // const data = await getDocs(cartCollectionRef);
-        // setCart(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+        // const usersDocRef = doc(db, "users", auth.currentUser.uid)
+        // const cartRef = collection(orderRef, 'cart');
+        // const cartCollectionRef = collection(usersDocRef, "cart")
 
-        // await setDoc(doc(db, "cities", "LA"), {
-        // name: "Los Angeles",
-        // state: "CA",
-        // country: "USA"
+        // userDocData = await getDoc(usersDocRef)
+        // console.log(userDocData.data())
+        // console.log(cartCollectionRef.data())
+        
+
+        const orderRef = await addDoc(collection(db, "orders"), {email: auth.currentUser.email});
+        // await orderRef.doc(auth.currentUser.uid).setDoc(userDocData.data());
+
+    
+        // const cartData = await getDocs(cartRef);
+
+        // cartData.forEach((cartItem) => {
+        //     console.log(cartItem)
+        //     setDoc(doc(orderRef, "cart", cartItem), {name: itemName, quantity: quantity})
+
         // });
 
         console.log("added order")
+
+        navigation.navigate('ConfirmationScreen')
     }
       const handlePayPress = async () => {
         // Gather the customer's billing information (for example, email)

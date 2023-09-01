@@ -10,7 +10,6 @@ import styles from '../style';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { increment } from 'firebase/firestore';
 
-
 export const CartScreen = ({navigation}) => {
 
     // //have a use state variable for the collection
@@ -66,14 +65,19 @@ export const CartScreen = ({navigation}) => {
         getCart();
     }, [cart]);
 
+    // const getTotalCost = () => {
+    //     const total = cart.reduce((accumulator, item) => {
+    //         return (accumulator + item["price"] * item["quantity"]).toFixed(2);
+    //     }, 0);
+    //     return total;
+    // };
+
     const getTotalCost = () => {
         const total = cart.reduce((accumulator, item) => {
-            return (accumulator + item["price"] * item["quantity"]).toFixed(2);
+            return accumulator + (item["price"] * item["quantity"]);
         }, 0);
         return total;
     };
-
-
 
   
     // const decrement = () => {
