@@ -15,6 +15,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {useFonts} from "expo-font";
 import { initStripe } from '@stripe/stripe-react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import {TranslatorProvider} from 'react-native-translator' // here
 
 
 const Stack = createNativeStackNavigator();
@@ -112,6 +113,7 @@ const MyStack = () => {
       }
 
   return (
+    <TranslatorProvider>
     <NavigationContainer>
         {console.log(homeRoute)}
     <Stack.Navigator initialRouteName={homeRoute}>
@@ -125,7 +127,7 @@ const MyStack = () => {
 
     </Stack.Navigator>
     </NavigationContainer>
-
+    </TranslatorProvider>
   );
 }
 

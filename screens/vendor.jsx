@@ -7,6 +7,7 @@ import {db} from '../firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Translator from 'react-native-translator';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -22,6 +23,8 @@ const VendorScreen = ({navigation}) => {
     const [vendorDocRef, setVendorDocRef] = useState();
     const [menuCollectionRef, setMenuCollectionRef] = useState();
     const [imgPath, setImgPath] = useState(require("../assets/images/cucumber.jpg")); 
+    const [result, setResult] = useState('');
+    const [lang, setLang] = useState('')
 
     const getData = async () => {
         try {
@@ -67,6 +70,12 @@ const VendorScreen = ({navigation}) => {
 
     }, []);
 
+    // function translateVal(value, from)  {
+    //     if (from != "en") {
+    //         setResult(value)
+    //     }
+    // }
+
     const storeData = async (value) => {
         try {
           await AsyncStorage.setItem('item-id', value);
@@ -76,6 +85,7 @@ const VendorScreen = ({navigation}) => {
         } catch (e) {
           // saving error
         }
+   
       };
       
     return (
@@ -115,7 +125,14 @@ const VendorScreen = ({navigation}) => {
                     </View>
                     <View style={[styles.container, {paddingBottom: 10}]}>
                         <Text style={[styles.headerTwoText, {margin: "5%"}]}>Information:</Text>
+                        <Translator
+                            from="ko"
+                            to="en"
+                            value={vendorInfo.description}
+                            onTranslated={(value)=> vendorInfo.lang != "en" ? setResult(value): null}
+                        />
                         <Text style={styles.bodytext}>{vendorInfo.description}</Text>
+                        <Text style={styles.bodytext}>{result}</Text>
                     </View>
                 </View>
 
