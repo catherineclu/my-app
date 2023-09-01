@@ -117,7 +117,7 @@ export const CartScreen = ({navigation}) => {
             
             <View style={{marginTop: 20, width: '100%'}}>
                 {cart.map((item) => {
-                    return <View style={[cartstyles.item]}>
+                    return <View style={[cartstyles.item]} key={item.id}>
                         <View style={{ alignItems: 'flex-start'}}>
                             <Text style={styles.subheading}>{item.name}</Text>
                             <View style={{flexDirection: "row", alignItems: 'center'}}>
