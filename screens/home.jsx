@@ -25,7 +25,7 @@ export const HomeScreen = ({navigation}) => {
     // }
     const [vendors, setVendors] = useState([]);
     const vendorCollectionRef = collection(db, "vendor");
-    const[imgurl, setImgurl] = useState("");
+    const [vendorImages, setVendorImages] = useState({});
 
     const SignOutUser = ()=>{
         signOut(auth)
@@ -51,54 +51,81 @@ export const HomeScreen = ({navigation}) => {
         }
       };
 
-    
+    const createImage = async (id) => {
+        try {
+            // Get a reference to the storage service, which is used to create references in your storage bucket
+            const storage = getStorage();
+
+            // Create a reference to the file we want to download
+            const imgLink = "images/" + id + ".png"
+            console.log("image link", imgLink)
+            const imgRef = ref(storage, imgLink);  
+
+            const url = await getDownloadURL(imgRef);
+            await setImgurl(url)
+            console.log("url", imgurl)
+
+            // // Get the download URL
+            // getDownloadURL(imgRef)
+            // .then((url) => {
+            // // save url somewhere...
+            // setImgurl(url)
+            // console.log("url", url)
+            // })
+            // .catch((error) => {
+            // // A full list of error codes is available at
+            // // https://firebase.google.com/docs/storage/web/handle-errors
+            // switch (error.code) {
+            //     case 'storage/object-not-found':
+            //     // File doesn't exist
+            //     break;
+            //     case 'storage/unauthorized':
+            //     // User doesn't have permission to access the object
+            //     break;
+            //     case 'storage/canceled':
+            //     // User canceled the upload
+            //     break;
+
+            //     // ...
+
+            //     case 'storage/unknown':
+            //     // Unknown error occurred, inspect the server response
+            //     break;
+            // }
+            // }
+
+            // )
+  
+          } catch (e) {
+            console.log(e)
+          }
+    }
 
     useEffect(() => {
         const getVendors = async () => {
+            const storage = getStorage();
             const vendorData = await getDocs(vendorCollectionRef);
+            const vendorsWithImages = {};
+            
+            for (const doc of vendorData.docs) {
+                const vendor = { ...doc.data(), id: doc.id };
+                const imgLink = "images/" + vendor.name + ".png";
+                const imgRef = ref(storage, imgLink);
+
+                try {
+                    const url = await getDownloadURL(imgRef);
+                    vendorsWithImages[vendor.id] = url;
+                } catch (error) {
+                    // Handle any errors (e.g., image not found)
+                    console.error("Error fetching image:", error);
+                }
+            }
+
+            setVendorImages(vendorsWithImages);
             setVendors(vendorData.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
         }
         getVendors();
-
-
-        // Get a reference to the storage service, which is used to create references in your storage bucket
-    const storage = getStorage();
-
-    // Create a reference to the file we want to download
-const starsRef = ref(storage, 'images/5Ln5vKIXNa7ZNshoMDTQ.png');
-
-// Get the download URL
-getDownloadURL(starsRef)
-  .then((url) => {
-    // Insert url into an <img> tag to "download"
-    console.log("url", url); 
-    setImgurl(url)
-    console.log("state", imgurl)
-  })
-  .catch((error) => {
-    // A full list of error codes is available at
-    // https://firebase.google.com/docs/storage/web/handle-errors
-    switch (error.code) {
-      case 'storage/object-not-found':
-        // File doesn't exist
-        break;
-      case 'storage/unauthorized':
-        // User doesn't have permission to access the object
-        break;
-      case 'storage/canceled':
-        // User canceled the upload
-        break;
-
-      // ...
-
-      case 'storage/unknown':
-        // Unknown error occurred, inspect the server response
-        break;
-    }
-  }
-  
-  )
-
+        
     }, []);
 
     return (
@@ -109,9 +136,10 @@ getDownloadURL(starsRef)
             </View>
 
             {vendors.map((vendor) => {
+                        console.log(vendorImages[vendor.id])
                         return(
             <Pressable style={styles.vendor} key={vendor.id} onPress={() => storeData(vendor.id)}>
-                <Image style={styles.vendorImage} src={"https://firebasestorage.googleapis.com/v0/b/my-app-fe62e.appspot.com/o/images%2F5Ln5vKIXNa7ZNshoMDTQ.png?alt=media&token=16143c80-88c6-4ca2-af9e-5631e8919602"}/>
+                <Image style={styles.vendorImage} source={{ uri: vendorImages[vendor.id] }}/> 
                 <View style={styles.vendorTextContainer}>
                     <View style={{marginLeft: 10, flex: 1}}>
                         <Text style={styles.vendorName}>{vendor.name}</Text>
