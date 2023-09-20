@@ -109,7 +109,7 @@ const VendorScreen = ({navigation}) => {
             <ScrollView width="100%" showsVerticalScrollIndicator={false}>
                 
                 <View style={styles.container}>
-                    <Image source={imgPath} 
+                    <Image source={vendor.picture} 
                             alt="cucumber image"
                             style={styles.banner}
                     />
@@ -145,7 +145,7 @@ const VendorScreen = ({navigation}) => {
                         return(
                         <View key={item.id}>
                             <Pressable style={styles.vendor} key={item.id} onPress={() => storeData(item.id)}>
-                                <Image style={styles.vendorImage} source={require("../assets/images/banchan.jpg")} 
+                                <Image style={styles.vendorImage} source={item.picture} 
                                     alt="banchan1"
                                     />
                                 <View style={styles.vendorTextContainer}>
