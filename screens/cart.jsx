@@ -28,7 +28,7 @@ export const CartScreen = ({navigation}) => {
     const deleteItem = async(id) => {
         const itemDoc = doc(usersDocRef, "cart", id);
         await deleteDoc(itemDoc)
-        navigation.replace('Main', { screen: 'CartScreen' })
+        navigation.navigate('Main', { screen: 'CartScreen' })
         console.log("deleted")
     }
 
